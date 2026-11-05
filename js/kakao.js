@@ -1243,6 +1243,7 @@ mainSearchPanel.querySelector(".kakao-main-search-cancel")
    });
 
   const homeBar = document.getElementById("kakao-home");
+  homeBar.addEventListener("click", closeKakao);
 let homeStart = null;
 
 homeBar.addEventListener("pointerdown", (event) => {
