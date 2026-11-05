@@ -4904,3 +4904,27 @@ button.kakao-composer-plus {
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
+@media (max-width: 600px) {
+  /* 底部预留：退出操作区 + 系统手势缓冲区 */
+  #kakao-app {
+    padding-bottom: 72px;
+  }
+
+  #kakao-home {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    width: 100%;
+    height: 42px;
+    z-index: 100;
+    background: transparent;
+    touch-action: none;
+  }
+
+  #kakao-home::after {
+    bottom: 19px;
+    width: 110px;
+    height: 4px;
+  }
+}
