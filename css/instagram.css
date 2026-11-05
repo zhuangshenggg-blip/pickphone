@@ -1607,3 +1607,29 @@
   font-weight: 600;
   line-height: 1.2;
 }
+@media (max-width: 600px) {
+  #instagram-app .ig-home {
+    bottom: 30px;
+    height: 42px;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    touch-action: none;
+  }
+
+  #instagram-app .ig-home::after {
+    position: static;
+    transform: none;
+    margin: 0;
+    width: 110px;
+    height: 4px;
+  }
+
+  #instagram-app .ig-nav {
+    bottom: 78px;
+  }
+
+  #instagram-app .ig-content {
+    padding-bottom: 140px;
+  }
+}
