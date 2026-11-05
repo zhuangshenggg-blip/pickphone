@@ -1,0 +1,264 @@
+.date {
+      margin-top: 12mm;
+      padding: 0 3mm;
+      font-family: "Microsoft YaHei", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: white;
+      text-align: center;
+      white-space: nowrap;
+      letter-spacing: 0;
+    }
+
+    .time {
+      margin-top: -1px;
+      font-family: "Arial", sans-serif;
+      font-size: 100px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -4px;
+      color: white;
+      text-align: center;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+
+      transform: scaleY(1.2);
+      background: none;
+      -webkit-text-stroke: 0;
+      text-shadow: none;
+      filter: none;
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+    }
+
+    .bottom {
+      position: absolute;
+      bottom: 24px;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .home-bar {
+      width: 130px;
+      height: 5px;
+      margin: 16px auto 0;
+      border-radius: 10px;
+      background: white;
+    }
+    /* 顶部状态栏 */
+    .status-bar {
+      position: absolute;
+      top: 15px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .status-left,
+    .status-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+/* 静音图标 */
+    .mute-icon {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+/* 四格信号 */
+    .signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 13px;
+    }
+
+    .signal span {
+      width: 3px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .signal span:nth-child(1) { height: 5px; }
+    .signal span:nth-child(2) { height: 8px; }
+    .signal span:nth-child(3) { height: 11px; }
+    .signal span:nth-child(4) { height: 14px; }
+
+/* 电池和右侧凸起 */
+.battery {
+  position: relative;
+  width: 23px;
+  height: 12px;
+  margin-right: 3px;
+  border-radius: 4px;
+  background: white;
+}
+
+.battery::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 4px;
+  width: 2px;
+  height: 4px;
+  border-radius: 0 2px 2px 0;
+  background: rgba(255, 255, 255, 0.7);
+}
+/* 时间中间的两个圆点 */
+.colon {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  flex-shrink: 0;
+  width: 14px;
+  height: 36px;
+  margin: 0 4px;
+  transform: translateY(-3px);
+}
+
+.colon::before,
+.colon::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: white;
+}  
+/* 密码界面覆盖整个锁屏 */
+.passcode-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border-radius: inherit;
+  background: rgba(20, 25, 35, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: white;
+}
+
+.passcode-screen[hidden] {
+  display: none;
+}
+
+.passcode-content {
+  height: 100%;
+  padding: 65px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.passcode-lock {
+  font-size: 22px;
+}
+
+.passcode-content h2 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.passcode-tip {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+/* 六个密码圆点 */
+.passcode-dots {
+  display: flex;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.passcode-dots span {
+  width: 9px;
+  height: 9px;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.passcode-dots span.filled {
+  background: white;
+}
+
+.passcode-error {
+  height: 16px;
+  margin: 10px 0;
+  font-size: 11px;
+  color: #ffd2d2;
+}
+
+/* 数字键盘 */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 56px);
+  gap: 14px 18px;
+}
+
+.keypad button {
+  width: 56px;
+  height: 56px;
+  padding: 4px 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.keypad button small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+.keypad button:active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.passcode-actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.passcode-actions button {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* 允许鼠标或手指拖动，避免选中文字 */
+.lock-screen {
+  touch-action: none;
+  user-select: none;
+}
+.keypad[hidden],
+.passcode-actions[hidden],
+.passcode-dots[hidden] {
+  display: none;
+}

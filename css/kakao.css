@@ -1,0 +1,4906 @@
+/* KakaoTalk 应用容器 */
+.kakao-app {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  padding-top: 42px;
+  background: #fff;
+  color: #191919;
+  text-align: left;
+  touch-action: auto;
+}
+
+.kakao-app[hidden] {
+  display: none;
+}
+
+/* 打开应用后，原来的状态栏显示在应用上方 */
+.lock-screen.kakao-open .status-bar {
+  z-index: 35;
+  color: #191919;
+}
+
+.lock-screen.kakao-open .signal span,
+.lock-screen.kakao-open .battery {
+  background: #191919;
+}
+
+.lock-screen.kakao-open .battery::after {
+  background: #777;
+}
+
+/* 顶部标题与按钮 */
+.kakao-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 43px;
+  padding: 0 13px;
+}
+
+.kakao-header h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.kakao-header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.kakao-header-actions button {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.kakao-header-actions svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 中间内容可以单独滚动 */
+.kakao-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 13px;
+}
+
+.kakao-placeholder {
+  padding: 35px 10px;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* 聊天页的筛选按钮 */
+.kakao-filters {
+  display: flex;
+  gap: 7px;
+  padding: 5px 0 12px;
+}
+
+.kakao-filter {
+  padding: 6px 11px;
+  border: 0;
+  border-radius: 18px;
+  background: #f1f1f1;
+  color: #666;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.kakao-filter.is-active {
+  background: #242424;
+  color: white;
+}
+
+/* 好友页和更多页的个人资料 */
+.kakao-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0 17px;
+  border-bottom: 1px solid #efefef;
+}
+
+.kakao-profile-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  border-radius: 16px;
+  background: #f7df8b;
+  color: #725b1d;
+  font-size: 15px;
+}
+
+.kakao-profile-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.kakao-profile-note {
+  margin-top: 4px;
+  color: #999;
+  font-size: 10px;
+}
+
+.kakao-section-label {
+  margin: 13px 0;
+  color: #888;
+  font-size: 10px;
+}
+
+/* 通话页 */
+.kakao-calls-empty {
+  padding-top: 95px;
+  text-align: center;
+}
+
+.kakao-calls-symbol {
+  margin-bottom: 17px;
+  color: #b8cbd9;
+  font-size: 35px;
+}
+
+.kakao-calls-empty strong {
+  font-size: 13px;
+}
+
+.kakao-calls-empty p {
+  color: #888;
+  font-size: 10px;
+}
+
+/* 底部四个导航 */
+.kakao-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex-shrink: 0;
+  height: 47px;
+  background: #fafafa;
+}
+
+.kakao-tabs button {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  color: #bfc1c3;
+  cursor: pointer;
+}
+
+.kakao-tabs button[aria-pressed="true"] {
+  color: #303538;
+}
+
+.kakao-tabs svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* 点击底部横条返回桌面 */
+.kakao-home {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 19px;
+  padding: 0;
+  border: 0;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.kakao-home::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translateX(-50%);
+  width: 95px;
+  height: 4px;
+  border-radius: 4px;
+  background: #222;
+}
+/* 默认头像 */
+img.kakao-profile-avatar {
+  display: block;
+  object-fit: cover;
+  background: transparent;
+}
+/* 聊天列表 */
+.kakao-chat-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 61px;
+  padding: 9px 0;
+  border: none;
+  background: transparent;
+  color: #191919;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-chat-row:active {
+  background: #f5f5f5;
+}
+
+/* 默认头像 */
+.kakao-chat-avatar {
+  flex-shrink: 0;
+  width: 39px;
+  height: 39px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+/* 中间的姓名和消息 */
+.kakao-chat-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kakao-chat-name {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kakao-chat-preview {
+  margin-top: 5px;
+  overflow: hidden;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 右侧时间与未读数量 */
+.kakao-chat-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: stretch;
+  flex-shrink: 0;
+  gap: 6px;
+  padding-top: 3px;
+  min-width: 29px;
+}
+
+.kakao-chat-time {
+  color: #999;
+  font-size: 8px;
+}
+
+.kakao-unread {
+  min-width: 15px;
+  padding: 2px 4px;
+  border-radius: 10px;
+  background: #ff6535;
+  color: white;
+  font-size: 8px;
+  line-height: 1.1;
+  text-align: center;
+}
+/* 聊天详情背景 */
+.kakao-app.in-conversation {
+  background: #b8cbd9;
+}
+
+.in-conversation .kakao-header {
+  background: #b8cbd9;
+}
+
+.in-conversation .kakao-header h1 {
+  font-size: 14px;
+}
+
+/* 聊天详情里隐藏底部四个导航 */
+.in-conversation .kakao-tabs {
+  display: none;
+}
+
+.in-conversation .kakao-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.in-conversation .kakao-home {
+  background: #fff;
+}
+
+/* 消息滚动区域 */
+.kakao-messages {
+  flex: 1;
+  min-height: 0;
+  padding: 10px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.kakao-message-date {
+  width: fit-content;
+  margin: 0 auto 0px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(70, 90, 105, 0.18);
+  color: #42515d;
+  font-size: 9px;
+}
+
+.kakao-message-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 13px;
+}
+
+.kakao-message-avatar {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.kakao-message-group {
+  min-width: 0;
+  max-width: 77%;
+}
+
+.kakao-message-name {
+  margin-bottom: 4px;
+  color: #45515a;
+  font-size: 9px;
+}
+
+.kakao-message-bubble {
+  width: fit-content;
+  padding: 8px 9px;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+/* 自己发出的消息靠右，黄色气泡 */
+.kakao-message-row.mine {
+  justify-content: flex-end;
+}
+
+.mine .kakao-message-bubble {
+  margin-left: auto;
+  background: #fee500;
+}
+
+.kakao-typing {
+  margin: 8px 0;
+  color: #596b79;
+  font-size: 9px;
+  text-align: center;
+}
+
+/* 回复选项面板 */
+.kakao-reply-panel {
+  display: grid;
+  flex-shrink: 0;
+  gap: 7px;
+  max-height: 150px;
+  padding: 9px;
+  overflow-y: auto;
+  background: #f3f5f7;
+}
+
+.kakao-reply-panel[hidden] {
+  display: none;
+}
+
+.kakao-reply-panel button {
+  padding: 9px;
+  border: 1px solid #e0e3e6;
+  border-radius: 10px;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* 底部输入栏 */
+.kakao-composer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 5px 9px;
+  background: #fff;
+}
+
+.kakao-composer-plus {
+  color: #888;
+  font-size: 23px;
+  line-height: 1;
+}
+
+.kakao-composer > button {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 1px solid #e4e7ea;
+  border-radius: 15px;
+  background: #f5f6f7;
+  color: #888;
+  font-family: inherit;
+  font-size: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-composer > button:disabled {
+  cursor: default;
+}
+
+.kakao-composer-smile {
+  color: #888;
+  font-size: 20px;
+}
+/* 普通页面隐藏聊天详情顶部栏 */
+.kakao-conversation-header {
+  display: none;
+}
+
+/* 进入聊天后隐藏原来的顶部栏 */
+.in-conversation .kakao-header {
+  display: none;
+}
+
+/* 聊天顶部：左右按钮组，中间姓名 */
+.in-conversation .kakao-conversation-header {
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) 83px;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 5px;
+  height: 44px;
+  padding: 3px 8px 7px;
+}
+
+.kakao-conversation-header button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.kakao-conversation-header svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 左侧玻璃胶囊 */
+.kakao-conversation-back {
+  gap: 3px;
+  width: 50px;
+  height: 30px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.28) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.5),
+    0 1px 3px rgba(40, 55, 65, 0.12);
+}
+
+.kakao-conversation-back span {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 姓名：在左右按钮之间居中 */
+.kakao-conversation-title {
+  min-width: 0;
+  overflow: hidden;
+  color: #20272c;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 右侧玻璃胶囊 */
+.kakao-conversation-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 30px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.5),
+    0 1px 3px rgba(40, 55, 65, 0.12);
+}
+
+.kakao-conversation-tools button {
+  width: 26px;
+  height: 30px;
+}
+
+.kakao-conversation-tools svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* 功能尚未连接，保持图标正常显示 */
+.kakao-conversation-tools button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+/* 底部横条用于上滑退出 */
+.kakao-home {
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.kakao-home:active {
+  cursor: grabbing;
+}
+/* 好友列表标题 */
+.kakao-friend-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 5px;
+  color: #888;
+  font-size: 9px;
+}
+
+/* 每一位好友 */
+.kakao-friend-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 57px;
+  padding: 9px 0;
+  border: none;
+  background: transparent;
+  color: #191919;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-friend-row:active {
+  background: #f5f5f5;
+}
+
+.kakao-friend-avatar {
+  flex-shrink: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 13px;
+  object-fit: cover;
+}
+
+.kakao-friend-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kakao-friend-name {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kakao-friend-status {
+  margin-top: 4px;
+  overflow: hidden;
+  color: #999;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* 聊天记录搜索栏 */
+.kakao-chat-search {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.kakao-chat-search[hidden] {
+  display: none;
+}
+
+.kakao-chat-search input {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.85);
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  user-select: text;
+}
+
+.kakao-chat-search input:focus-visible {
+  outline: 2px solid #758d9e;
+}
+
+.kakao-chat-search > button {
+  padding: 5px;
+  border: none;
+  background: none;
+  color: #354957;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.kakao-search-result {
+  width: 100%;
+  color: #526573;
+  font-size: 9px;
+}
+
+.kakao-search-result:empty {
+  display: none;
+}
+
+/* 防止原来的 flex 样式覆盖隐藏状态 */
+.kakao-message-row[hidden] {
+  display: none;
+}
+/* 主界面搜索：覆盖列表，保留顶部栏和底部导航 */
+.kakao-main-search {
+  position: absolute;
+  top: 85px;
+  bottom: 66px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  text-align: left;
+}
+
+.kakao-main-search[hidden] {
+  display: none;
+}
+
+.kakao-main-search-form {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 7px;
+  padding: 8px 12px;
+}
+
+.kakao-main-search-form input {
+  flex: 1;
+  min-width: 0;
+  width: 0;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 12px;
+  background: #f1f2f3;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  user-select: text;
+}
+
+.kakao-main-search-form button {
+  padding: 5px 0;
+  border: none;
+  background: none;
+  color: #555;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.kakao-main-search-results {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 10px 13px;
+  color: #888;
+  font-size: 11px;
+}
+
+.kakao-search-preview {
+  display: -webkit-box;
+  margin-top: 5px;
+  overflow: hidden;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+/* 聊天信息页：覆盖整个应用 */
+.kakao-info-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  padding: 42px 10px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #090909;
+  color: #f5f5f5;
+  text-align: left;
+}
+
+.kakao-info-screen[hidden] {
+  display: none;
+}
+
+/* 左上角返回按钮 */
+.kakao-info-back {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #393939;
+  border-radius: 50%;
+  background: linear-gradient(#303030, #242424);
+  color: white;
+  cursor: pointer;
+}
+
+.kakao-info-back svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 头像和聊天名称 */
+.kakao-info-profile {
+  margin-top: -30px;
+  padding: 0 35px 16px;
+  text-align: center;
+}
+
+.kakao-info-profile img {
+  display: block;
+  width: 55px;
+  height: 55px;
+  margin: 0 auto;
+  border-radius: 21px;
+  object-fit: cover;
+}
+
+.kakao-info-profile h2 {
+  margin: 12px 0 0;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+/* 信息页打开时，顶部状态栏显示白色 */
+.lock-screen.kakao-info-open .status-bar {
+  z-index: 45;
+  color: white;
+}
+
+.lock-screen.kakao-info-open .signal span,
+.lock-screen.kakao-info-open .battery {
+  background: white;
+}
+
+.lock-screen.kakao-info-open .battery::after {
+  background: #aaa;
+}
+/* 聊天信息页分类卡片 */
+.kakao-info-card {
+  margin-top: 9px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: #222;
+}
+
+.kakao-info-card > button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  min-height: 30px;
+  padding: 7px 0;
+  border: none;
+  background: transparent;
+  color: #f2f2f2;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.kakao-info-card > button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+/* 分类图标占位 */
+.kakao-info-card > button > span {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  font-size: 19px;
+}
+
+.info-green { color: #2db75c; }
+.info-gray { color: #8c9aad; }
+.info-blue { color: #409cff; }
+.info-purple { color: #9c74fa; }
+
+/* Boards、公告、投票两列排列 */
+.kakao-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.kakao-info-card em {
+  color: #999;
+  font-size: 10px;
+}
+
+/* 参与者卡片 */
+.kakao-info-members-card {
+  padding: 12px 10px;
+}
+
+.kakao-info-members-card h3 {
+  margin: 0 0 7px;
+  font-size: 11px;
+}
+
+.kakao-info-card > .kakao-info-invite {
+  color: #45a7ec;
+}
+
+.kakao-info-card > .kakao-info-invite > span {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #333;
+  font-size: 23px;
+}
+
+.kakao-info-member {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+}
+
+.kakao-info-member img {
+  flex-shrink: 0;
+  width: 27px;
+  height: 27px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.kakao-info-member span {
+  min-width: 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.kakao-info-member small {
+  flex-shrink: 0;
+  padding: 2px 3px;
+  border-radius: 50%;
+  background: #555;
+  color: white;
+  font-size: 8px;
+}
+
+/* 底部离开聊天室 */
+.kakao-info-card > .kakao-info-leave {
+  border-top: 1px solid #444;
+  color: #ff7548;
+}
+/* 图片 / 视频列表 */
+.kakao-media-screen {
+  position: absolute;
+  inset: 40px 0 0;
+  z-index: 46;
+  display: flex;
+  flex-direction: column;
+  background: #090909;
+  color: white;
+}
+
+.kakao-media-screen[hidden],
+.kakao-media-viewer[hidden] {
+  display: none;
+}
+
+.kakao-media-header {
+  display: grid;
+  grid-template-columns: 35px 1fr 35px;
+  align-items: center;
+  flex-shrink: 0;
+  height: 43px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.kakao-media-header strong {
+  font-size: 13px;
+}
+
+.kakao-media-header button {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.kakao-media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-content: start;
+  flex: 1;
+  min-height: 0;
+  gap: 3px;
+  padding: 5px 8px 20px;
+  overflow-y: auto;
+}
+
+.kakao-media-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: #282828;
+  color: white;
+  cursor: pointer;
+}
+
+.kakao-media-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kakao-media-video-label {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 9px;
+}
+
+.kakao-media-empty {
+  grid-column: 1 / -1;
+  margin-top: 65px;
+  color: #999;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* 图片和视频预览 */
+.kakao-media-viewer {
+  position: absolute;
+  inset: 40px 0 0;
+  z-index: 47;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+#kakao-viewer-close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: #333;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#kakao-viewer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 42px 0;
+}
+
+#kakao-viewer-content img,
+#kakao-viewer-content video {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+/* 聊天里的链接资料页 */
+.kakao-links-screen {
+  position: absolute;
+  inset: 40px 0 0;
+  z-index: 46;
+  display: flex;
+  flex-direction: column;
+  background: #090909;
+  color: white;
+}
+
+.kakao-links-screen[hidden] {
+  display: none;
+}
+
+.kakao-links-header {
+  display: grid;
+  grid-template-columns: 35px 1fr 35px;
+  align-items: center;
+  flex-shrink: 0;
+  height: 43px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.kakao-links-header strong {
+  font-size: 13px;
+}
+
+.kakao-links-header button {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.kakao-links-list {
+  flex: 1;
+  min-height: 0;
+  padding: 8px 12px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.kakao-link-card {
+  display: block;
+  margin-bottom: 12px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #242424;
+  color: #f5f5f5;
+  text-decoration: none;
+}
+
+.kakao-link-card > img {
+  display: block;
+  width: 100%;
+  height: 105px;
+  object-fit: cover;
+}
+
+.kakao-link-info {
+  padding: 12px;
+  overflow-wrap: anywhere;
+}
+
+.kakao-link-info strong {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.kakao-link-info p {
+  margin: 6px 0;
+  color: #aaa;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.kakao-link-info p:empty {
+  display: none;
+}
+
+.kakao-link-info small {
+  display: block;
+  margin-top: 7px;
+  color: #8a9aaa;
+  font-size: 9px;
+}
+
+.kakao-links-empty {
+  margin-top: 65px;
+  color: #999;
+  font-size: 11px;
+  text-align: center;
+}
+/* 隐藏系统滚动条，不预留宽度 */
+.ki-screen {
+  scrollbar-width: none;
+  scrollbar-gutter: auto;
+}
+
+.ki-screen::-webkit-scrollbar {
+  display: none;
+}
+
+/* 浮在页面右侧的细滚动条 */
+.ki-scroll-indicator {
+  position: absolute;
+  top: 46px;
+  right: 2px;
+  bottom: 18px;
+  z-index: 44;
+  width: 2px;
+  pointer-events: none;
+}
+
+.ki-scroll-indicator[hidden] {
+  display: none;
+}
+
+.ki-scroll-thumb {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-radius: 10px;
+  background: rgba(190, 190, 190, 0.6);
+}
+/* 隐藏 KakaoTalk 内的系统滚动条和箭头 */
+.kakao-app,
+.kakao-app * {
+  scrollbar-width: none;
+  scrollbar-gutter: auto;
+}
+
+.kakao-app::-webkit-scrollbar,
+.kakao-app *::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* 悬浮指示条：不占内容宽度 */
+.ki-scroll-indicator {
+  position: absolute;
+  top: 46px;
+  right: 2px;
+  bottom: 18px;
+  z-index: 44;
+  width: 1.5px;
+  background: transparent;
+  border: none;
+  pointer-events: none;
+}
+
+.ki-scroll-indicator[hidden] {
+  display: none;
+}
+
+.ki-scroll-thumb {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-radius: 10px;
+  background: rgba(180, 180, 180, 0.5);
+}
+/* 聊天信息页的收藏按钮 */
+.kakao-info-favorite {
+  position: absolute;
+  top: 44px;
+  right: 47px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border: 1px solid #393939;
+  border-radius: 50%;
+  background: linear-gradient(#303030, #242424);
+  color: #eee;
+  cursor: pointer;
+}
+
+.kakao-info-favorite svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 收藏后显示黄色实心星星 */
+.kakao-info-favorite.is-favorite {
+  color: #ffdf65;
+}
+
+.kakao-info-favorite.is-favorite svg {
+  fill: currentColor;
+}
+/* 已置顶聊天的浅色背景 */
+.kakao-chat-row.is-pinned {
+  background: #faf8f0;
+  border-radius: 10px;
+}
+
+.kakao-chat-row.is-pinned:active {
+  background: #f0ecdc;
+}
+
+/* 姓名旁的收藏标识 */
+.kakao-pinned-star {
+  margin-left: 5px;
+  color: #cba64b;
+  font-size: 10px;
+  vertical-align: 1px;
+}
+/* 通知按钮，放在收藏星星左侧 */
+.kakao-info-notification {
+  position: absolute;
+  top: 44px;
+  right: 84px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border: 1px solid #393939;
+  border-radius: 50%;
+  background: linear-gradient(#303030, #242424);
+  color: #eee;
+  cursor: pointer;
+}
+
+.kakao-info-notification svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 正常状态隐藏斜线 */
+.kakao-info-notification .notification-slash {
+  display: none;
+}
+
+/* 静音状态显示斜线 */
+.kakao-info-notification.is-muted {
+  color: #aaa;
+}
+
+.kakao-info-notification.is-muted .notification-slash {
+  display: block;
+}
+/* 头像放在顶部按钮下方，避免重叠 */
+.kakao-info-profile {
+  margin-top: 18px;
+}
+/* 右上角设置按钮 */
+.kakao-info-settings {
+  position: absolute;
+  top: 44px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border: 1px solid #393939;
+  border-radius: 50%;
+  background: linear-gradient(#303030, #242424);
+  color: #eee;
+  cursor: pointer;
+}
+
+.kakao-info-settings svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 设置页面 */
+.kakao-chat-settings {
+  position: absolute;
+  inset: 40px 0 0;
+  z-index: 46;
+  padding: 0 14px 20px;
+  overflow-y: auto;
+  background: #090909;
+  color: #eee;
+  text-align: left;
+}
+
+.kakao-chat-settings[hidden] {
+  display: none;
+}
+
+.kakao-settings-header {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  align-items: center;
+  height: 44px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.kakao-settings-header strong {
+  font-size: 13px;
+}
+
+.kakao-settings-header button {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+#kakao-settings-form label {
+  display: block;
+  margin-bottom: 9px;
+  color: #bbb;
+  font-size: 11px;
+}
+
+#kakao-settings-name {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 9px;
+  background: #242424;
+  color: white;
+  font-family: inherit;
+  font-size: 12px;
+  user-select: text;
+  touch-action: auto;
+}
+
+#kakao-settings-form p {
+  color: #888;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.kakao-settings-save {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: none;
+  border-radius: 9px;
+  background: #fee500;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#kakao-settings-error {
+  margin-top: 10px;
+  color: #ff9999;
+  font-size: 10px;
+}
+/* 头像支持点击查看 */
+#kakao-info-avatar,
+.kakao-message-avatar {
+  cursor: zoom-in;
+}
+/* 聊天名称旁的静音标识 */
+.kakao-chat-muted {
+  display: inline-flex;
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+  color: #999;
+  vertical-align: -2px;
+}
+
+.kakao-chat-muted svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* 投票选项 */
+.kakao-poll-choice {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 9px 10px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #303030;
+  color: #eee;
+  font-family: inherit;
+  font-size: 11px;
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.kakao-poll-choice.is-selected {
+  border-color: #baa52a;
+  background: #39351e;
+  color: #fee500;
+}
+#kakao-info-invite[hidden] {
+  display: none;
+}
+#kakao-create-secret[hidden] {
+  display: none;
+}
+/* 气泡旁边的发送时间 */
+.kakao-message-clock {
+  flex-shrink: 0;
+  align-self: flex-end;
+  padding-bottom: 2px;
+  color: #87939c;
+  font-size: 8px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* 时间与气泡保持较小间距 */
+.kakao-message-row {
+  column-gap: 5px;
+}
+/* 图片消息气泡 */
+.kakao-message-bubble.kakao-image-bubble {
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.kakao-message-image-button {
+  display: block;
+  padding: 0;
+  border: none;
+  border-radius: 9px;
+  overflow: hidden;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.kakao-message-image {
+  display: block;
+  width: 145px;
+  max-width: 100%;
+  height: auto;
+  max-height: 210px;
+  object-fit: cover;
+  border-radius: 9px;
+}
+/* 全部／未接筛选 */
+.kakao-call-filters {
+  display: flex;
+  gap: 7px;
+  padding: 5px 0 12px;
+}
+
+.kakao-call-filters button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 18px;
+  background: #f1f1f1;
+  color: #777;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.kakao-call-filters button.is-active {
+  background: #242424;
+  color: white;
+}
+
+/* 没有记录时 */
+.kakao-call-empty {
+  padding: 85px 5px 20px;
+  text-align: center;
+}
+
+.kakao-call-empty > svg {
+  display: block;
+  width: 45px;
+  height: 45px;
+  margin: 0 auto 20px;
+  fill: none;
+  stroke: #b8cbd9;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kakao-call-empty strong {
+  font-size: 13px;
+}
+
+.kakao-call-empty p {
+  color: #999;
+  font-size: 10px;
+}
+
+/* 通话记录 */
+.kakao-call-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 64px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.kakao-call-avatar {
+  flex-shrink: 0;
+  width: 37px;
+  height: 37px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.kakao-call-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kakao-call-info strong {
+  display: block;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.kakao-call-description {
+  display: block;
+  margin-top: 5px;
+  color: #999;
+  font-size: 9px;
+}
+
+.kakao-call-row.is-missed .kakao-call-info strong,
+.kakao-call-row.is-missed .kakao-call-description {
+  color: #e45a51;
+}
+
+.kakao-call-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 5px;
+  color: #999;
+  font-size: 8px;
+}
+/* 更多页：个人资料 */
+.kakao-more-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0 22px;
+}
+
+#kakao-more-avatar {
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  border-radius: 16px;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+#kakao-more-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kakao-more-profile-info {
+  min-width: 0;
+}
+
+.kakao-more-profile-info strong {
+  display: block;
+  color: #222;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.kakao-more-profile-info small {
+  display: block;
+  margin-top: 5px;
+  color: #999;
+  font-size: 9px;
+}
+
+/* 两排功能入口，每排四个 */
+.kakao-more-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  row-gap: 23px;
+  padding: 9px 0 20px;
+}
+
+.kakao-more-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #333;
+  font-family: inherit;
+  font-size: 8px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.kakao-more-item:disabled {
+  opacity: 1;
+}
+
+.kakao-more-icon {
+  display: block;
+  width: 21px;
+  height: 21px;
+}
+
+.kakao-more-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Account 单独一行 */
+.kakao-more-account {
+  width: 25%;
+  padding: 2px 0 20px;
+}
+
+.kakao-more-divider {
+  height: 1px;
+  background: #eee;
+}
+
+.kakao-more-section-title {
+  margin: 14px 0 18px;
+  color: #555;
+  font-size: 9px;
+  font-weight: 500;
+}
+
+/* 推荐应用 */
+.kakao-more-recommend {
+  width: 25%;
+  padding-bottom: 20px;
+}
+
+.kakao-more-recommend .kakao-more-icon {
+  color: #8561ee;
+}
+/* 主页面上栏 */
+.kakao-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 43px;
+  padding: 0 13px;
+}
+
+.kakao-header h1 {
+  flex-shrink: 0;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* 搜索和当前页面按钮排列在一起 */
+.kakao-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.kakao-page-actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.kakao-header-actions button {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #222;
+}
+
+.kakao-header-actions svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kakao-header-tool:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+/* 隐藏旧的返回桌面按钮，保留元素供原代码使用 */
+#kakao-exit {
+  display: none;
+}
+/* 添加好友浮层 */
+.kakao-add-friend {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.78);
+  color: #eee;
+  text-align: left;
+  touch-action: auto;
+}
+
+.kakao-add-friend[hidden] {
+  display: none;
+}
+
+/* 顶部深色区域 */
+.kakao-add-panel {
+  flex-shrink: 0;
+  padding: 42px 10px 15px;
+  background: #222;
+}
+
+.kakao-add-header {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  align-items: center;
+  height: 38px;
+  text-align: center;
+}
+
+.kakao-add-header strong {
+  font-size: 14px;
+}
+
+#kakao-add-close {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #555;
+  border-radius: 50%;
+  background: linear-gradient(#444, #303030);
+  color: white;
+  font-size: 27px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* 四种添加方式 */
+.kakao-add-methods {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2px;
+  margin-top: 17px;
+}
+
+.kakao-add-methods button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 6px 0;
+  border: none;
+  background: none;
+  color: #eee;
+  font-family: inherit;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.kakao-add-methods button:disabled {
+  opacity: 1;
+}
+
+.kakao-add-methods svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 二维码卡片 */
+.kakao-add-card-area {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  overflow-y: auto;
+}
+
+.kakao-my-qr-card {
+  flex-shrink: 0;
+  width: 62%;
+  padding: 13px 11px 11px;
+  border-radius: 12px;
+  background: #ffedc5;
+  color: #222;
+}
+
+.kakao-my-qr-card > strong {
+  display: block;
+  font-size: 14px;
+}
+
+.kakao-my-qr-card > small {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+}
+
+.kakao-my-qr-card > small:empty {
+  display: none;
+}
+
+.kakao-my-qr-box {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  margin-top: 13px;
+  padding: 7px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: white;
+}
+
+.kakao-my-qr-box img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.kakao-my-qr-box img[hidden],
+#kakao-my-qr-empty[hidden] {
+  display: none;
+}
+
+#kakao-my-qr-empty {
+  margin: 0;
+  color: #999;
+  font-size: 10px;
+  text-align: center;
+}
+
+/* 浮层打开时显示白色状态栏 */
+.lock-screen.kakao-add-friend-open .status-bar {
+  z-index: 55;
+  color: white;
+}
+
+.lock-screen.kakao-add-friend-open .signal span,
+.lock-screen.kakao-add-friend-open .battery {
+  background: white;
+}
+
+.lock-screen.kakao-add-friend-open .battery::after {
+  background: #aaa;
+}
+/* 通讯录添加页面 */
+.kakao-contact-add {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 42px 11px 20px;
+  overflow-y: auto;
+  background: #090909;
+  color: #eee;
+  text-align: left;
+}
+
+.kakao-contact-add[hidden] {
+  display: none;
+}
+
+.kakao-contact-add-header {
+  display: grid;
+  grid-template-columns: 38px 1fr 42px;
+  align-items: center;
+  gap: 5px;
+  height: 38px;
+}
+
+.kakao-contact-add-header strong {
+  font-size: 12px;
+  text-align: center;
+}
+
+#kakao-contact-add-close {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #444;
+  border-radius: 50%;
+  background: #292929;
+  color: #eee;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+#kakao-contact-add-confirm {
+  padding: 7px 8px;
+  border: none;
+  border-radius: 18px;
+  background: #fee500;
+  color: #222;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+#kakao-contact-add-confirm:disabled {
+  background: #292929;
+  color: #777;
+  cursor: default;
+}
+
+/* 区号、号码和昵称 */
+.kakao-contact-add-fields {
+  margin-top: 21px;
+}
+
+.kakao-contact-add-fields select,
+.kakao-contact-add-fields input {
+  display: block;
+  width: 100%;
+  height: 39px;
+  padding: 9px 0;
+  border: none;
+  border-bottom: 1px solid #666;
+  border-radius: 0;
+  background: transparent;
+  color: #eee;
+  font-family: inherit;
+  font-size: 12px;
+  color-scheme: dark;
+  user-select: text;
+  touch-action: auto;
+}
+
+.kakao-contact-add-fields input::placeholder {
+  color: #777;
+}
+
+.kakao-contact-add-fields input:focus,
+.kakao-contact-add-fields select:focus {
+  outline: none;
+  border-bottom-color: #fee500;
+}
+
+.kakao-contact-counter {
+  margin-top: 5px;
+  color: #888;
+  font-size: 9px;
+  text-align: right;
+}
+
+#kakao-contact-add-status {
+  color: #ff9999;
+  font-size: 10px;
+  line-height: 1.6;
+}
+/* 添加好友：浅色遮罩，仍能看到后方好友列表 */
+.kakao-add-friend {
+  background: rgba(255, 255, 255, 0.8);
+  color: #222;
+}
+
+/* 顶部添加方式区域 */
+.kakao-add-panel {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.kakao-add-methods button {
+  color: #333;
+}
+
+/* 圆形关闭按钮 */
+#kakao-add-close,
+#kakao-contact-add-close {
+  border: 1px solid #e2e2e2;
+  background: linear-gradient(#fafafa, #eeeeee);
+  color: #333;
+}
+
+/* 通讯录添加页面 */
+.kakao-contact-add {
+  background: #fff;
+  color: #222;
+}
+
+.kakao-contact-add-header strong {
+  color: #222;
+}
+
+/* 区号、号码和昵称 */
+.kakao-contact-add-fields select,
+.kakao-contact-add-fields input {
+  background: #fff;
+  color: #222;
+  border-bottom-color: #ccc;
+  color-scheme: light;
+}
+
+.kakao-contact-add-fields input::placeholder {
+  color: #999;
+}
+
+.kakao-contact-add-fields input:focus,
+.kakao-contact-add-fields select:focus {
+  border-bottom-color: #555;
+}
+
+/* 确认按钮 */
+#kakao-contact-add-confirm {
+  background: #fee500;
+  color: #222;
+}
+
+#kakao-contact-add-confirm:disabled {
+  background: #eee;
+  color: #aaa;
+}
+
+.kakao-contact-counter {
+  color: #999;
+}
+
+#kakao-contact-add-status {
+  color: #d9534f;
+}
+
+/* 二维码卡片保留浅黄色，二维码区域为白色 */
+.kakao-my-qr-card {
+  background: #ffedc5;
+  color: #222;
+}
+
+.kakao-my-qr-box {
+  background: #fff;
+}
+
+/* 日间版状态栏 */
+.lock-screen.kakao-add-friend-open .status-bar {
+  color: #222;
+}
+
+.lock-screen.kakao-add-friend-open .signal span,
+.lock-screen.kakao-add-friend-open .battery {
+  background: #222;
+}
+
+.lock-screen.kakao-add-friend-open .battery::after {
+  background: #888;
+}
+/* 隐藏系统下拉框 */
+#kakao-contact-country[hidden] {
+  display: none;
+}
+
+/* 选择国家／地区入口 */
+.kakao-country-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 39px;
+  padding: 9px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* 国家／地区页 */
+.kakao-country-picker {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  padding: 42px 11px 12px;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-country-picker[hidden] {
+  display: none;
+}
+
+.kakao-country-header {
+  display: grid;
+  grid-template-columns: 32px 1fr 32px;
+  align-items: center;
+  flex-shrink: 0;
+  height: 38px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.kakao-country-header strong {
+  font-size: 14px;
+}
+
+#kakao-country-close {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #e2e2e2;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #333;
+  font-size: 27px;
+  cursor: pointer;
+}
+
+/* 搜索框 */
+#kakao-country-search {
+  flex-shrink: 0;
+  width: 100%;
+  height: 32px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #f4f4f4;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+  user-select: text;
+  touch-action: auto;
+}
+
+#kakao-country-search::placeholder {
+  color: #999;
+}
+
+/* 列表滚动，不挤占页面宽度 */
+.kakao-country-list {
+  flex: 1;
+  min-height: 0;
+  margin-top: 9px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.kakao-country-list::-webkit-scrollbar {
+  display: none;
+}
+
+.kakao-country-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 38px;
+  padding: 11px 0;
+  border: none;
+  border-bottom: 1px solid #f2f2f2;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-country-code {
+  color: #888;
+}
+
+.kakao-country-note {
+  display: block;
+  margin-top: 3px;
+  color: #999;
+  font-size: 9px;
+}
+
+.kakao-country-check {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #fee500;
+  color: #222;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.kakao-country-empty {
+  margin-top: 25px;
+  color: #999;
+  font-size: 11px;
+  text-align: center;
+}
+/* KakaoTalk ID 添加：日间版 */
+.kakao-id-add {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 42px 13px 20px;
+  background: #fff;
+  color: #191919;
+  color-scheme: light;
+}
+
+.kakao-id-add[hidden] {
+  display: none !important;
+}
+
+.kakao-id-add-header {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 4px;
+  height: 42px;
+}
+
+.kakao-id-add-header h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.kakao-id-add-close {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  padding: 0 0 3px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #303030;
+  font-family: Arial, sans-serif;
+  font-size: 33px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.kakao-id-add-body {
+  margin-top: 23px;
+}
+
+.kakao-id-input-label {
+  display: block;
+}
+
+.kakao-id-input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38px;
+  padding: 0 0 9px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.kakao-id-input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.kakao-id-input:focus {
+  border-bottom-color: #777;
+}
+
+.kakao-id-counter {
+  margin-top: 6px;
+  color: #808080;
+  font-size: 11px;
+  text-align: right;
+}
+
+.kakao-my-id-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 11px;
+  padding: 12px;
+  border-radius: 6px;
+  background: #f6f6f6;
+  color: #444;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.kakao-my-id-value {
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.kakao-id-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* 添加好友：四个入口对齐 */
+.kakao-add-methods {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+}
+
+.kakao-add-methods > button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 72px;
+  margin: 0;
+  padding: 8px 0;
+
+  font-family: inherit;
+  font-size: 10px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.kakao-add-methods > button svg,
+.kakao-add-methods > button img {
+  display: block;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+}
+
+.kakao-add-methods > button span {
+  margin: 0;
+  line-height: 16px;
+}
+/* 邀请朋友：日间版 */
+.kakao-friend-invite {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 42px 13px 20px;
+  overflow-y: auto;
+  background: #fff;
+  color: #191919;
+  color-scheme: light;
+}
+
+.kakao-friend-invite[hidden] {
+  display: none !important;
+}
+
+.kakao-friend-invite-header {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 4px;
+  height: 42px;
+}
+
+.kakao-friend-invite-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.kakao-friend-invite-close {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  margin: 0;
+  padding: 0 0 3px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #303030;
+  font-family: Arial, sans-serif;
+  font-size: 33px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.kakao-friend-invite-body {
+  margin-top: 23px;
+}
+
+.kakao-friend-invite-description {
+  margin: 0 0 13px;
+  color: #444;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.kakao-friend-invite-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.kakao-friend-invite-options > button {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 45px;
+  margin: 0;
+  padding: 13px 0;
+  border: 0;
+  border-bottom: 1px solid #f1f1f1;
+  border-radius: 0;
+  background: transparent;
+  color: #191919;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-friend-invite-options > button:last-child {
+  border-bottom: 0;
+}
+
+.kakao-friend-invite-options > button:active {
+  background: #f7f7f7;
+}
+
+.kakao-friend-invite-status {
+  margin: 15px 0 0;
+  color: #888;
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.kakao-friend-invite-status:empty {
+  display: none;
+}
+/* 邀请朋友：缩小字体和选项间距 */
+.kakao-friend-invite-header h2 {
+  font-size: 14px;
+}
+
+.kakao-friend-invite-description {
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+
+.kakao-friend-invite-options > button {
+  min-height: 35px;
+  padding: 9px 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+/* 二维码卡片上移 */
+.kakao-my-qr-card {
+  position: relative;
+  top: -20px;
+}
+/* 邀请链接复制成功弹窗 */
+.kakao-invite-copy-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.kakao-invite-copy-overlay[hidden] {
+  display: none !important;
+}
+
+.kakao-invite-copy-dialog {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 280px;
+  padding: 18px 13px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 28px;
+  background: rgba(245, 245, 245, 0.86);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  color: #111;
+}
+
+.kakao-invite-copy-dialog p {
+  margin: 0 11px 17px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.kakao-invite-copy-dialog button {
+  display: block;
+  width: 100%;
+  height: 39px;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+
+  background: rgba(0, 0, 0, 0.13);
+  color: #111;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+/* 通过短信邀请 */
+.kakao-sms-invite {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 42px 13px 20px;
+
+  background: #fff;
+  color: #191919;
+  color-scheme: light;
+}
+
+.kakao-sms-invite[hidden] {
+  display: none !important;
+}
+
+.kakao-sms-header {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  flex-shrink: 0;
+  height: 42px;
+}
+
+.kakao-sms-header h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.kakao-sms-back {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #303030;
+  cursor: pointer;
+}
+
+.kakao-sms-back svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kakao-sms-confirm {
+  min-height: 34px;
+  padding: 0 5px;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  background: #fee500;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kakao-sms-confirm:disabled {
+  background: #fafafa;
+  color: #aaa;
+  cursor: default;
+}
+
+.kakao-sms-search {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  height: 35px;
+  margin-top: 9px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 5px;
+  outline: none;
+  background: #f5f5f5;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.kakao-sms-search::placeholder {
+  color: #999;
+}
+
+.kakao-sms-list {
+  flex: 1;
+  min-height: 0;
+  margin-top: 8px;
+  overflow-y: auto;
+}
+
+.kakao-sms-person {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  border-bottom: 1px solid #f2f2f2;
+  cursor: pointer;
+}
+
+.kakao-sms-person:last-child {
+  border-bottom: 0;
+}
+
+.kakao-sms-person-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+.kakao-sms-person-details strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.kakao-sms-person-details small {
+  color: #888;
+  font-size: 11px;
+}
+
+.kakao-sms-person input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  border: 1.5px solid #ddd;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.kakao-sms-person input:checked {
+  border-color: #fee500;
+  background: #fee500;
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+.kakao-sms-person input:focus-visible {
+  outline: 2px solid #777;
+  outline-offset: 3px;
+}
+
+.kakao-sms-empty,
+.kakao-sms-status {
+  color: #999;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.kakao-sms-empty {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.kakao-sms-status {
+  margin: 8px 0 0;
+}
+
+.kakao-sms-status:empty {
+  display: none;
+}
+/* 邀请：底部分享面板 */
+.kakao-invite-share-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+
+  display: flex;
+  align-items: flex-end;
+  padding: 7px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.kakao-invite-share-overlay[hidden] {
+  display: none !important;
+}
+
+.kakao-invite-share-sheet {
+  box-sizing: border-box;
+  width: 100%;
+  max-height: 90%;
+  overflow-y: auto;
+  padding: 8px 13px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 28px;
+
+  background: rgba(250, 250, 250, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.08);
+  color: #222;
+}
+
+.kakao-share-handle {
+  width: 30px;
+  height: 3px;
+  margin: 0 auto 14px;
+  border-radius: 3px;
+  background: #ccc;
+}
+
+.kakao-share-preview {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.kakao-share-preview-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: #fee500;
+  color: #3c1e1e;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.kakao-share-preview strong,
+.kakao-share-preview small {
+  display: block;
+}
+
+.kakao-share-preview strong {
+  font-size: 12px;
+}
+
+.kakao-share-preview small {
+  margin-top: 4px;
+  color: #888;
+  font-size: 10px;
+}
+
+.kakao-share-apps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding: 17px 0;
+}
+
+.kakao-share-apps button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.kakao-share-app-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.share-messages {
+  background: #35d454;
+  color: #fff;
+}
+
+.share-mail {
+  background: #1595ff;
+  color: #fff;
+}
+
+.share-notes {
+  background: linear-gradient(#ffda30 28%, #fff 28%);
+  color: #999;
+}
+
+.share-files {
+  background: #fff;
+  color: #168af5;
+}
+
+.kakao-share-copy {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-share-status {
+  margin: 10px 0;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.kakao-share-status:empty {
+  display: none;
+}
+
+.kakao-share-cancel {
+  width: 100%;
+  height: 37px;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+/* 二维码填满白色方框 */
+.kakao-my-qr-box {
+  padding: 0;
+}
+
+.kakao-my-qr-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* 好友页设置浮动菜单 */
+.kakao-friend-settings-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 48;
+  background: transparent;
+}
+
+.kakao-friend-settings-overlay[hidden] {
+  display: none !important;
+}
+
+.kakao-friend-settings-menu {
+  position: absolute;
+  top: 45px;
+  right: 12px;
+
+  box-sizing: border-box;
+  width: 62%;
+  max-width: 225px;
+  padding: 7px 0;
+  overflow: hidden;
+
+  border: 1px solid rgba(200, 200, 200, 0.75);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 9px 25px rgba(0, 0, 0, 0.12);
+}
+
+.kakao-friend-settings-menu > button {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 36px;
+  margin: 0;
+  padding: 9px 22px;
+
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #191919;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-friend-settings-menu > button:active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.kakao-friend-settings-status {
+  margin: 4px 22px 8px;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-friend-settings-status:empty {
+  display: none;
+}
+/* 好友列表：编辑上栏 */
+.kakao-friend-edit-header {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  right: 0;
+  z-index: 35;
+
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) 60px;
+  align-items: center;
+  box-sizing: border-box;
+  height: 43px;
+  padding: 0 13px;
+
+  border-bottom: 1px solid #f1f1f1;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-friend-edit-header[hidden] {
+  display: none !important;
+}
+
+.kakao-friend-edit-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.kakao-friend-edit-header button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* 每行左侧为资料，右侧为隐藏按钮 */
+.kakao-friend-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.kakao-friend-edit-row > .kakao-friend-row {
+  flex: 1;
+  min-width: 0;
+}
+
+.kakao-friend-edit-row > .kakao-friend-row:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.kakao-friend-hide-button {
+  flex-shrink: 0;
+  min-width: 43px;
+  height: 25px;
+  margin-right: 3px;
+  padding: 0 9px;
+
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.kakao-friend-hide-button:active {
+  background: #f5f5f5;
+}
+/* 管理朋友：日间版 */
+.kakao-friend-manage {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 42px;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-friend-manage[hidden] {
+  display: none !important;
+}
+
+.kakao-friend-manage-header {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 40px;
+  align-items: center;
+  flex-shrink: 0;
+  height: 44px;
+  padding: 0 13px;
+  background: #fff;
+}
+
+.kakao-friend-manage-header h2 {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.kakao-friend-manage-header button {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #333;
+  cursor: pointer;
+}
+
+.kakao-friend-manage-header svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kakao-friend-manage-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.kakao-manage-group {
+  padding: 20px 13px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.kakao-manage-group h3 {
+  margin: 0 0 15px;
+  color: #555;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.kakao-manage-item {
+  padding: 10px 0 13px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.kakao-manage-item:last-child {
+  border-bottom: 0;
+}
+
+.kakao-manage-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.kakao-manage-item-top > span {
+  flex: 1;
+  min-width: 0;
+}
+
+.kakao-manage-item p {
+  margin: 8px 0 0;
+  color: #888;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* 黄色开关 */
+.kakao-manage-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 39px;
+  height: 24px;
+  padding: 0 4px 0 0;
+  border: 0;
+  border-radius: 20px;
+  background: #fee500;
+  color: #555;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: right;
+  isolation: isolate;
+  cursor: pointer;
+}
+
+.kakao-manage-switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: -1;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.kakao-manage-switch[aria-checked="false"] {
+  padding: 0 0 0 7px;
+  background: #b5b5b5;
+  color: #999;
+  text-align: left;
+}
+
+.kakao-manage-switch[aria-checked="false"]::before {
+  right: auto;
+  left: 2px;
+}
+
+.kakao-manage-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-manage-action > span:last-child {
+  color: #999;
+  font-size: 21px;
+}
+
+.kakao-friend-manage-status {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 9px 13px 18px;
+  background: #fff;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-friend-manage-status:empty {
+  display: none;
+}
+/* 隐藏好友确认弹窗 */
+.kakao-hide-friend-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  padding: 28px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.kakao-hide-friend-overlay[hidden] {
+  display: none !important;
+}
+
+.kakao-hide-friend-dialog {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 280px;
+  padding: 20px 13px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 28px;
+  background: rgba(248, 248, 248, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  color: #111;
+}
+
+.kakao-hide-friend-dialog h2 {
+  margin: 0 10px 12px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.kakao-hide-friend-dialog p {
+  margin: 0 10px 18px;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.kakao-hide-friend-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.kakao-hide-friend-actions button {
+  height: 39px;
+  padding: 0;
+  border: 0;
+  border-radius: 23px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kakao-hide-friend-actions [data-hide-choice="cancel"] {
+  background: #ddd;
+  color: #111;
+}
+
+.kakao-hide-friend-actions [data-hide-choice="confirm"] {
+  background: #008cff;
+  color: #fff;
+}
+/* 隐藏好友 / 已屏蔽对象 */
+.kakao-friend-manage-detail {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 42px;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-friend-manage-detail[hidden] {
+  display: none !important;
+}
+
+.kakao-manage-detail-list {
+  flex: 1;
+  min-height: 0;
+  padding: 12px 13px 24px;
+  overflow-y: auto;
+}
+
+.kakao-manage-detail-list.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kakao-manage-detail-empty {
+  margin: 0;
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+}
+
+.kakao-hidden-friend-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 59px;
+}
+
+.kakao-hidden-friend-row img {
+  flex-shrink: 0;
+  width: 37px;
+  height: 37px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.kakao-hidden-friend-row > span {
+  flex: 1;
+  min-width: 0;
+  color: #222;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.kakao-hidden-friend-row button {
+  flex-shrink: 0;
+  height: 26px;
+  padding: 0 9px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+/* 管理朋友：紧凑布局 */
+.kakao-friend-manage-header h2 {
+  font-size: 14px;
+}
+
+.kakao-manage-group {
+  padding: 13px 13px 8px;
+}
+
+.kakao-manage-group h3 {
+  margin-bottom: 8px;
+  font-size: 9px;
+}
+
+.kakao-manage-item {
+  padding: 7px 0 9px;
+}
+
+.kakao-manage-item-top,
+.kakao-manage-action {
+  font-size: 11px;
+}
+
+.kakao-manage-item p {
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+/* 开关同步缩小 */
+.kakao-manage-switch {
+  width: 34px;
+  height: 21px;
+  font-size: 12px;
+  line-height: 21px;
+}
+
+.kakao-manage-switch::before {
+  width: 17px;
+  height: 17px;
+}
+
+.kakao-manage-action > span:last-child {
+  font-size: 18px;
+}
+/* 开始聊天：日间版 */
+.kakao-start-chat {
+  position: absolute;
+  inset: 0;
+  z-index: 45;
+  box-sizing: border-box;
+  padding: 42px 13px 20px;
+  overflow-y: auto;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-start-chat[hidden] {
+  display: none !important;
+}
+
+.kakao-start-chat-header {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  align-items: center;
+  height: 43px;
+}
+
+.kakao-start-chat-header h2 {
+  margin: 0;
+  font-size: 15px;
+  text-align: center;
+}
+
+.kakao-start-chat-close {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  padding: 0 0 3px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 33px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.kakao-start-chat-types {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.kakao-start-chat-types button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.kakao-start-chat-types svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kakao-nearby-chat {
+  padding-top: 17px;
+}
+
+.kakao-nearby-description {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+
+.kakao-nearby-description > svg {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: #78baff;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.kakao-nearby-description h3 {
+  margin: 0 0 3px;
+  font-size: 12px;
+}
+
+.kakao-nearby-description p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-nearby-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 13px;
+}
+
+.kakao-nearby-actions button {
+  min-height: 35px;
+  padding: 8px 4px;
+  border: 0;
+  border-radius: 12px;
+  background: #f1f1f1;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.kakao-start-chat-status {
+  margin-top: 15px;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-start-chat-status:empty {
+  display: none;
+}
+/* 选择好友 / 邀请成员 */
+.kakao-chat-picker {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 42px 13px 20px;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-chat-picker[hidden] {
+  display: none !important;
+}
+
+.kakao-chat-picker-header {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  flex-shrink: 0;
+  height: 43px;
+}
+
+.kakao-chat-picker-header h2 {
+  margin: 0;
+  font-size: 15px;
+  text-align: center;
+}
+
+.kakao-chat-picker-close {
+  width: 35px;
+  height: 35px;
+  padding: 0 0 3px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #333;
+  font: 33px/1 Arial, sans-serif;
+  cursor: pointer;
+}
+
+.kakao-chat-picker-confirm {
+  height: 33px;
+  padding: 0 5px;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  background: #fee500;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.kakao-chat-picker-confirm:disabled {
+  background: #fafafa;
+  color: #aaa;
+  cursor: default;
+}
+
+.kakao-chat-picker-search {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  height: 35px;
+  margin-top: 12px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 5px;
+  background: #f5f5f5;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.kakao-chat-picker > h3 {
+  margin: 18px 0 7px;
+  font-size: 12px;
+}
+
+.kakao-chat-picker-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.kakao-chat-picker-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 49px;
+  cursor: pointer;
+}
+
+.kakao-chat-picker-person img {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 13px;
+  object-fit: cover;
+}
+
+.kakao-chat-picker-person > span {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.kakao-chat-picker-person input {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border: 1.5px solid #aaa;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+
+.kakao-chat-picker-person input:checked {
+  border-color: #fee500;
+  background: #fee500;
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+.kakao-chat-picker-person input:focus-visible {
+  outline: 2px solid #777;
+  outline-offset: 3px;
+}
+
+.kakao-chat-picker-empty,
+.kakao-chat-picker-status {
+  color: #999;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-chat-picker-status:empty {
+  display: none;
+}
+/* 团队聊天：名称设置 */
+.kakao-team-setup {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 42px 13px 20px;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-team-setup[hidden] {
+  display: none !important;
+}
+
+.kakao-team-back {
+  width: 35px;
+  height: 35px;
+  padding: 0 0 3px;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #333;
+  font: 30px/1 Arial, sans-serif;
+  cursor: pointer;
+}
+
+.kakao-team-create {
+  height: 33px;
+  padding: 0 5px;
+  border: 0;
+  border-radius: 20px;
+  background: #fee500;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.kakao-team-create:disabled {
+  background: #f5f5f5;
+  color: #aaa;
+  cursor: default;
+}
+
+.kakao-team-form {
+  flex: 1;
+  min-height: 0;
+  margin-top: 22px;
+  overflow-y: auto;
+}
+
+.kakao-team-form > label {
+  display: block;
+  margin-bottom: 9px;
+  color: #666;
+  font-size: 11px;
+}
+
+#kakao-team-name {
+  box-sizing: border-box;
+  width: 100%;
+  height: 35px;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.kakao-team-counter {
+  margin: 6px 0 22px;
+  color: #999;
+  font-size: 10px;
+  text-align: right;
+}
+
+.kakao-team-form h3 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.kakao-team-member {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 47px;
+  font-size: 12px;
+}
+
+.kakao-team-member img {
+  flex-shrink: 0;
+  width: 33px;
+  height: 33px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.kakao-team-member span {
+  overflow-wrap: anywhere;
+}
+
+.kakao-team-status {
+  color: #999;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-team-status:empty {
+  display: none;
+}
+/* 创建开放聊天：底部面板 */
+.kakao-open-chat-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 48;
+
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.kakao-open-chat-overlay[hidden] {
+  display: none !important;
+}
+
+.kakao-open-chat-sheet {
+  box-sizing: border-box;
+  width: 100%;
+  max-height: 85%;
+  padding: 7px 13px 18px;
+  overflow-y: auto;
+  border-radius: 25px 25px 0 0;
+  background: #f5f5f5;
+  color: #222;
+}
+
+.kakao-open-chat-handle {
+  width: 29px;
+  height: 3px;
+  margin: 0 auto;
+  border-radius: 3px;
+  background: #999;
+}
+
+.kakao-open-chat-sheet h2 {
+  margin: 17px 0 22px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.kakao-open-chat-options {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.kakao-open-chat-options > button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 61px;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 13px;
+  background: #fff;
+  color: #222;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-open-chat-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 34px;
+  font-size: 25px;
+}
+
+.kakao-open-chat-options > button > span:last-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.kakao-open-chat-options strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.kakao-open-chat-options small {
+  display: block;
+  margin-top: 4px;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.kakao-open-chat-options em {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 4px;
+  border: 1px solid #c5defa;
+  border-radius: 3px;
+  color: #087ee6;
+  font-size: 9px;
+  font-style: normal;
+  vertical-align: middle;
+}
+
+.kakao-open-chat-status {
+  margin: 12px 0 0;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-open-chat-status:empty {
+  display: none;
+}
+
+.kakao-open-chat-cancel {
+  width: 100%;
+  height: 34px;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: #fff;
+  color: #444;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+/* 聊天列表齿轮菜单 */
+.kakao-chat-settings-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 48;
+  background: transparent;
+}
+
+.kakao-chat-settings-overlay[hidden] {
+  display: none !important;
+}
+
+.kakao-chat-settings-menu {
+  position: absolute;
+  top: 45px;
+  right: 12px;
+  box-sizing: border-box;
+  width: 64%;
+  max-width: 230px;
+  padding: 13px 0 9px;
+
+  border: 1px solid rgba(200, 200, 200, 0.75);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 9px 25px rgba(0, 0, 0, 0.12);
+  color: #222;
+}
+
+.kakao-chat-settings-menu h3 {
+  margin: 0 18px 8px 35px;
+  color: #999;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.kakao-chat-settings-menu > button {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 3px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 34px;
+  margin: 0;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-chat-settings-menu > button:active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.kakao-sort-check {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.kakao-chat-settings-divider {
+  height: 1px;
+  margin: 8px 18px;
+  background: #ddd;
+}
+
+.kakao-chat-settings-status {
+  margin: 7px 18px;
+  color: #999;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-chat-settings-status:empty {
+  display: none;
+}
+/* 上栏设置齿轮：细线样式 */
+.kakao-header-tool[data-header-action="settings"] svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* 通话对象选择 */
+.kakao-call-picker {
+  z-index: 45;
+}
+
+.kakao-call-picker .kakao-chat-picker-header h2 {
+  font-size: 14px;
+}
+
+.kakao-call-picker-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-shrink: 0;
+  margin-top: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.kakao-call-picker-tabs button {
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  color: #999;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kakao-call-picker-tabs button[aria-pressed="true"] {
+  border-bottom-color: #222;
+  color: #222;
+}
+
+.kakao-call-picker-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 7px 0;
+}
+
+.kakao-call-picker-details strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.kakao-call-picker-details small {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  color: #999;
+  font-size: 10px;
+  line-height: 1.4;
+}
+/* 虚拟呼叫：日间版 */
+.kakao-outgoing-call {
+  position: absolute;
+  inset: 0;
+  z-index: 46;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 42px 22px 35px;
+  background: linear-gradient(#f7f9fc, #fff);
+  color: #222;
+}
+
+.kakao-outgoing-call[hidden] {
+  display: none !important;
+}
+
+.kakao-outgoing-call-profile {
+  width: 100%;
+  margin-top: 65px;
+  text-align: center;
+}
+
+.kakao-outgoing-call-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 28px;
+  object-fit: cover;
+}
+
+.kakao-outgoing-call-name {
+  max-height: 90px;
+  margin: 18px 0 9px;
+  overflow-y: auto;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.kakao-outgoing-call-profile p {
+  margin: 0;
+  color: #888;
+  font-size: 11px;
+}
+
+.kakao-call-dots {
+  display: inline-block;
+  animation: kakao-call-dots 1.4s ease-in-out infinite;
+}
+
+@keyframes kakao-call-dots {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kakao-call-dots {
+    animation: none;
+  }
+}
+
+.kakao-outgoing-call-controls {
+  margin-top: auto;
+  padding-top: 25px;
+}
+
+.kakao-call-hangup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #666;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.kakao-call-hangup-icon {
+  display: grid;
+  place-items: center;
+  width: 57px;
+  height: 57px;
+  border-radius: 50%;
+  background: #ff4c57;
+  color: #fff;
+}
+
+.kakao-call-hangup-icon svg {
+  width: 31px;
+  height: 31px;
+  fill: currentColor;
+}
+
+.kakao-call-hangup:active .kakao-call-hangup-icon {
+  background: #e83e49;
+}
+/* 输入栏加号 */
+button.kakao-composer-plus {
+  flex-shrink: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #aaa;
+  font-family: inherit;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* 聊天附件面板 */
+.kakao-attachment-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 48;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.kakao-attachment-overlay[hidden] {
+  display: none !important;
+}
+
+.kakao-attachment-sheet {
+  box-sizing: border-box;
+  width: 100%;
+  height: 52%;
+  padding: 0 13px 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 25px 25px 0 0;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-attachment-sheet.is-expanded {
+  height: calc(100% - 85px);
+}
+
+.kakao-attachment-handle {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 23px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  touch-action: none;
+  cursor: grab;
+}
+
+.kakao-attachment-handle span {
+  width: 29px;
+  height: 3px;
+  border-radius: 3px;
+  background: #999;
+}
+
+.kakao-attachment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 10px;
+}
+
+.kakao-attachment-header h2 {
+  margin: 0;
+  font-size: 13px;
+}
+
+.kakao-attachment-header button {
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 16px;
+  background: #f1f1f1;
+  color: #aaa;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.kakao-attachment-recent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+}
+
+.kakao-attachment-camera {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 79px;
+  height: 79px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: #999;
+  color: #fff;
+  cursor: pointer;
+}
+
+.kakao-attachment-camera svg {
+  width: 33px;
+  height: 33px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.kakao-attachment-photo-empty {
+  color: #aaa;
+  font-size: 10px;
+}
+
+.kakao-attachment-options > button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 39px;
+  padding: 8px 3px;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-attachment-options > button[data-attachment="location"],
+.kakao-attachment-options > button[data-attachment="file"] {
+  margin-top: 6px;
+  padding-top: 13px;
+  border-top: 1px solid #eee;
+}
+
+.kakao-attachment-icon {
+  width: 22px;
+  text-align: center;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.attachment-green { color: #00ad58; }
+.attachment-blue { color: #3397ff; }
+.attachment-gray { color: #8995a6; }
+.attachment-red { color: #ff5c70; }
+.attachment-purple { color: #9260ed; }
+
+.kakao-attachment-tools {
+  margin-top: 13px;
+  padding: 13px;
+  border-radius: 13px;
+  background: #f5f5f5;
+}
+
+.kakao-attachment-tools strong,
+.kakao-attachment-tools small {
+  display: block;
+  font-size: 11px;
+}
+
+.kakao-attachment-tools small {
+  margin-top: 5px;
+  color: #888;
+  font-size: 10px;
+}
+
+.kakao-attachment-status {
+  color: #999;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-attachment-status:empty {
+  display: none;
+}
+
+.kakao-attachment-close {
+  width: 100%;
+  height: 33px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 10px;
+  background: #f5f5f5;
+  color: #555;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+/* 加号缩小，回复按钮居中 */
+.kakao-composer {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 28px;
+  align-items: center;
+}
+
+button.kakao-composer-plus {
+  width: 28px;
+  padding: 0;
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+}
+
+#kakao-choose-reply {
+  min-width: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.kakao-composer-smile {
+  justify-self: center;
+}
+/* 附件面板：最近照片 */
+.kakao-attachment-photo {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 79px;
+  height: 79px;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.kakao-attachment-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kakao-attachment-photo input {
+  appearance: none;
+  -webkit-appearance: none;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 19px;
+  height: 19px;
+  margin: 0;
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.kakao-attachment-photo input:checked {
+  border-color: #fee500;
+  background: #fee500;
+}
+
+.kakao-attachment-photo input:checked::after {
+  content: "✓";
+  display: block;
+  color: #333;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.kakao-attachment-photo input:focus-visible {
+  outline: 2px solid #222;
+  outline-offset: 2px;
+}
+
+.kakao-attachment-header button:not(:disabled) {
+  background: #fee500;
+  color: #222;
+  cursor: pointer;
+}
+/* 共用一般设置：白色紧凑版 */
+.kakao-general-settings {
+  position: absolute;
+  inset: 0 0 66px;
+  z-index: 46;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 42px;
+  background: #fff;
+  color: #222;
+}
+
+.kakao-general-settings[hidden],
+.kakao-general-search[hidden] {
+  display: none !important;
+}
+
+.kakao-general-header {
+  display: grid;
+  grid-template-columns: 35px minmax(0, 1fr) 35px;
+  align-items: center;
+  flex-shrink: 0;
+  height: 44px;
+  padding: 0 13px;
+}
+
+.kakao-general-header h2 {
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.kakao-general-header button {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  background: #fafafa;
+  color: #333;
+  cursor: pointer;
+}
+
+.kakao-general-header svg,
+.kakao-general-row > svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.kakao-general-search {
+  flex-shrink: 0;
+  min-height: 32px;
+  margin: 8px 13px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  background: #f5f5f5;
+  color: #222;
+  font-family: inherit;
+  font-size: 11px;
+}
+
+.kakao-general-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.kakao-general-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 13px 24px;
+  border-bottom: 1px solid #eee;
+}
+
+.kakao-general-profile img {
+  flex-shrink: 0;
+  width: 47px;
+  height: 47px;
+  border-radius: 17px;
+  object-fit: cover;
+}
+
+.kakao-general-profile > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.kakao-general-profile strong,
+.kakao-general-profile small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.kakao-general-profile strong {
+  font-size: 13px;
+}
+
+.kakao-general-profile small {
+  margin-top: 5px;
+  color: #999;
+  font-size: 10px;
+}
+
+.kakao-general-profile small:empty {
+  display: none;
+}
+
+.kakao-general-profile button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.kakao-general-list {
+  padding: 10px 13px 20px;
+}
+
+.kakao-general-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 41px;
+  padding: 9px 2px;
+  border: 0;
+  border-bottom: 1px solid #f5f5f5;
+  background: transparent;
+  color: #222;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.kakao-general-row > svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.kakao-general-row-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.kakao-general-row-value {
+  max-width: 48%;
+  color: #888;
+  font-size: 10px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.kakao-general-row-name em {
+  display: inline-grid;
+  place-items: center;
+  width: 12px;
+  height: 12px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: #ff6436;
+  color: #fff;
+  font-size: 8px;
+  font-style: normal;
+  vertical-align: middle;
+}
+
+.kakao-general-row.starts-new-group {
+  margin-top: 17px;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+}
+
+.kakao-general-status,
+.kakao-general-empty {
+  margin: 0;
+  padding: 10px 13px;
+  color: #999;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.kakao-general-status:empty {
+  display: none;
+}
+/* 聊天中的定位卡片 */
+.kakao-message-bubble.kakao-location-bubble {
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+}
+
+.kakao-location-card {
+  display: block;
+  width: 185px;
+  max-width: 100%;
+  color: #222;
+  text-decoration: none;
+  text-align: left;
+}
+
+.kakao-location-map {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 95px;
+  background-color: #e9efdf;
+  background-image:
+    linear-gradient(
+      30deg,
+      transparent 43%,
+      #fff 44%,
+      #fff 50%,
+      transparent 51%
+    ),
+    linear-gradient(
+      100deg,
+      transparent 40%,
+      #fff 41%,
+      #fff 47%,
+      transparent 48%
+    );
+}
+
+.kakao-location-map svg {
+  width: 30px;
+  height: 34px;
+  fill: #f35b59;
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.kakao-location-info {
+  padding: 9px 10px;
+}
+
+.kakao-location-info strong {
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.kakao-location-info span {
+  display: block;
+  margin-top: 3px;
+  color: #888;
+  font-size: 10px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
