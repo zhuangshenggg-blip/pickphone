@@ -53,3 +53,9 @@
     border-radius: 0;
   }
 }
+@media (max-width: 600px) {
+  .lock-screen.kakao-open > .status-bar,
+  .lock-screen.instagram-open > .status-bar {
+    display: none;
+  }
+}
