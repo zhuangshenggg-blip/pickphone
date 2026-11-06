@@ -4928,3 +4928,87 @@ button.kakao-composer-plus {
     height: 4px;
   }
 }
+@media (max-width: 600px) {
+  #kakao-app {
+    /* 不再给重复的状态栏预留 42px */
+    padding-top: 12px;
+  }
+
+  #kakao-app:not(.in-conversation) .kakao-header {
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  #kakao-app:not(.in-conversation) .kakao-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  #kakao-app .kakao-header-actions {
+    gap: 12px;
+  }
+
+  #kakao-app .kakao-header-actions button {
+    width: 28px;
+    height: 36px;
+  }
+
+  #kakao-app .kakao-header-actions svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  #kakao-app:not(.in-conversation) .kakao-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  #kakao-app .kakao-filters {
+    gap: 8px;
+    padding: 4px 0 12px;
+  }
+
+  #kakao-app .kakao-filter {
+    padding: 9px 17px;
+    border-radius: 24px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  #kakao-app .kakao-chat-row {
+    min-height: 66px;
+    gap: 12px;
+    padding: 9px 0;
+  }
+
+  #kakao-app .kakao-chat-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 18px;
+  }
+
+  #kakao-app .kakao-chat-name {
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  #kakao-app .kakao-chat-preview {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  #kakao-app .kakao-chat-meta {
+    font-size: 12px;
+  }
+
+  #kakao-app .kakao-tabs {
+    height: 56px;
+  }
+
+  #kakao-app .kakao-tabs svg {
+    width: 26px;
+    height: 26px;
+  }
+}
