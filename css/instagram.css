@@ -1633,3 +1633,145 @@
     padding-bottom: 140px;
   }
 }
+@media (max-width: 600px) {
+  #instagram-app {
+    padding-top: 12px;
+  }
+
+  /* 首页顶部 */
+  #instagram-app .ig-header {
+    height: 52px;
+  }
+
+  #instagram-app .ig-home-dropdown {
+    font-size: 27px;
+  }
+
+  #instagram-app .ig-header-create svg,
+  #instagram-app .ig-header-activity svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  /* 快拍：接近一屏显示三个半 */
+  #instagram-app .ig-stories {
+    gap: 13px;
+    padding: 8px 12px 12px;
+  }
+
+  #instagram-app .ig-story {
+    flex: 0 0 23vw;
+    width: 23vw;
+    max-width: 104px;
+    font-size: 12px;
+  }
+
+  #instagram-app .ig-story-ring {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  /* 帖子作者信息 */
+  #instagram-app .ig-post-header {
+    min-height: 48px;
+    padding: 5px 10px;
+    gap: 7px;
+  }
+
+  #instagram-app .ig-post-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  #instagram-app .ig-post-author-line strong {
+    font-size: 14px;
+  }
+
+  #instagram-app .ig-post-subtitle {
+    font-size: 11px;
+  }
+
+  /* 个人主页上栏 */
+  #instagram-app .ig-profile-header {
+    height: 52px;
+  }
+
+  #instagram-app .ig-profile-account-name {
+    font-size: 22px;
+  }
+
+  /* 头像、名称和统计 */
+  #instagram-app .ig-personal-top {
+    grid-template-columns: 23% minmax(0, 1fr);
+    column-gap: 6%;
+    padding: 12px 4% 0;
+  }
+
+  #instagram-app .ig-personal-name {
+    margin-bottom: 13px;
+    font-size: 15px;
+  }
+
+  #instagram-app .ig-personal-stats > div > strong {
+    font-size: 16px !important;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  #instagram-app .ig-personal-stats > div > small {
+    margin-top: 3px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  #instagram-app .ig-personal-bio {
+    margin: 14px 4% 18px;
+    font-size: 14px;
+  }
+
+  #instagram-app .ig-personal-buttons {
+    margin: 0 4% 12px;
+  }
+
+  #instagram-app .ig-personal-buttons button {
+    height: 32px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  #instagram-app .ig-personal-tabs button {
+    height: 48px;
+  }
+
+  #instagram-app .ig-personal-tabs button svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  /* 三列帖子保持参考比例 */
+  #instagram-app .ig-personal-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+  }
+
+  #instagram-app .ig-personal-post {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* 底部导航按参考图收窄，不改退出手势的位置 */
+  #instagram-app .ig-nav {
+    left: 5%;
+    right: 5%;
+    height: 56px;
+  }
+
+  #instagram-app .ig-nav button {
+    height: 46px;
+  }
+
+  #instagram-app .ig-nav button svg {
+    width: 27px;
+    height: 27px;
+  }
+}
