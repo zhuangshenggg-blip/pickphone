@@ -48,6 +48,35 @@ window.INSTAGRAM_POSTS = [
 
     likes: 361000,
     comments: 603,
+    commentList: [
+  {
+    id: "comment-01",
+    username: "example_user",
+    avatar: "",
+    text: "너무 예뻐요 🖤",
+    time: "2天",
+    likes: 128,
+    replies: [
+      {
+        id: "reply-01",
+        username: "yezyizhere",
+        avatar: "./assets/avatars/yeji.jpg",
+        text: "고마워요 🖤",
+        time: "1天",
+        likes: 36
+      }
+    ]
+  },
+  {
+    id: "comment-02",
+    username: "another_user",
+    avatar: "",
+    text: "🌼🌼🌼",
+    time: "1天",
+    likes: 52,
+    replies: []
+  }
+],
     reposts: 11000,
     shares: 5671
   },
@@ -107,32 +136,4 @@ window.INSTAGRAM_STORIES = [
     avatar: ""
   }
 ];
-commentList: [
-  {
-    id: "comment-01",
-    username: "example_user",
-    avatar: "",
-    text: "너무 예뻐요 🖤",
-    time: "2天",
-    likes: 128,
-    replies: [
-      {
-        id: "reply-01",
-        username: "yezyizhere",
-        avatar: "./assets/avatars/yeji.jpg",
-        text: "고마워요 🖤",
-        time: "1天",
-        likes: 36
-      }
-    ]
-  },
-  {
-    id: "comment-02",
-    username: "another_user",
-    avatar: "",
-    text: "🌼🌼🌼",
-    time: "1天",
-    likes: 52,
-    replies: []
-  }
-],
+
