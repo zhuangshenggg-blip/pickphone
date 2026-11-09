@@ -1586,4 +1586,193 @@ function formatInstagramFollowers(value) {
 
   return count.toLocaleString("zh-CN");
 }
+// 评论面板
+const commentOverlay = document.createElement("div");
+commentOverlay.className = "ig-comments-overlay";
+commentOverlay.hidden = true;
+
+commentOverlay.innerHTML = `
+  <section class="ig-comments-sheet"
+           role="dialog"
+           aria-modal="true"
+           aria-label="评论">
+    <div class="ig-comments-handle"></div>
+
+    <header class="ig-comments-header">
+      <strong>评论</strong>
+      <button type="button"
+              class="ig-comments-close"
+              aria-label="关闭评论">×</button>
+    </header>
+
+    <div class="ig-comments-list"></div>
+  </section>
+`;
+
+app.appendChild(commentOverlay);
+
+const likedComments = new Set();
+let commentTrigger = null;
+
+function closeInstagramComments(restoreFocus = true) {
+  if (commentOverlay.hidden) return;
+
+  commentOverlay.hidden = true;
+
+  if (restoreFocus && commentTrigger?.isConnected) {
+    commentTrigger.focus();
+  }
+}
+
+function openInstagramComments(post, trigger) {
+  pauseInstagramVideos();
+  closeOwnPostMenu();
+  closeAccounts();
+
+  commentTrigger = trigger;
+
+  const list = commentOverlay.querySelector(".ig-comments-list");
+  list.replaceChildren();
+
+  const comments = Array.isArray(post.commentList)
+    ? post.commentList
+    : [];
+
+  function createComment(item, path, isReply = false) {
+    const row = document.createElement("div");
+    row.className = "ig-comment-row";
+
+    if (isReply) row.classList.add("is-reply");
+
+    const avatar = document.createElement("img");
+    avatar.src =
+      item.avatar || "./assets/avatars/default-avatar.png";
+    avatar.alt = "";
+    avatar.draggable = false;
+
+    const body = document.createElement("div");
+    body.className = "ig-comment-body";
+
+    const heading = document.createElement("div");
+    heading.className = "ig-comment-heading";
+
+    const username = document.createElement("strong");
+    username.textContent = item.username || "";
+
+    const time = document.createElement("span");
+    time.textContent = item.time || "";
+
+    heading.append(username, time);
+
+    const text = document.createElement("p");
+    text.textContent = item.text || "";
+
+    body.append(heading, text);
+
+    const like = document.createElement("button");
+    like.type = "button";
+    like.className = "ig-comment-like";
+
+    const key = `${instagramPostStateKey(post)}:comment:${path}`;
+    const base = Math.max(0, Math.floor(Number(item.likes) || 0));
+
+    function updateLike() {
+      const selected = likedComments.has(key);
+
+      like.setAttribute("aria-pressed", String(selected));
+      like.setAttribute(
+        "aria-label",
+        selected ? "取消评论点赞" : "点赞评论"
+      );
+
+      like.innerHTML = `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          ${instagramPostIcons.like}
+        </svg>
+        <span>${formatInstagramCount(base + Number(selected))}</span>
+      `;
+    }
+
+    updateLike();
+
+    like.addEventListener("click", () => {
+      if (likedComments.has(key)) {
+        likedComments.delete(key);
+      } else {
+        likedComments.add(key);
+      }
+
+      updateLike();
+    });
+
+    row.append(avatar, body, like);
+
+    const wrapper = document.createElement("div");
+    wrapper.appendChild(row);
+
+    const replies = Array.isArray(item.replies)
+      ? item.replies
+      : [];
+
+    if (replies.length && !isReply) {
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "ig-comment-replies-toggle";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = `查看 ${replies.length} 条回复`;
+
+      const repliesBox = document.createElement("div");
+      repliesBox.className = "ig-comment-replies";
+      repliesBox.hidden = true;
+
+      replies.forEach((reply, index) => {
+        repliesBox.appendChild(
+          createComment(reply, `${path}/reply-${index}`, true)
+        );
+      });
+
+      toggle.addEventListener("click", () => {
+        repliesBox.hidden = !repliesBox.hidden;
+
+        toggle.setAttribute(
+          "aria-expanded",
+          String(!repliesBox.hidden)
+        );
+
+        toggle.textContent = repliesBox.hidden
+          ? `查看 ${replies.length} 条回复`
+          : "收起回复";
+      });
+
+      wrapper.append(toggle, repliesBox);
+    }
+
+    return wrapper;
+  }
+
+  comments.forEach((item, index) => {
+    list.appendChild(createComment(item, String(index)));
+  });
+
+  if (!comments.length) {
+    const empty = document.createElement("p");
+    empty.className = "ig-comments-empty";
+    empty.textContent = "暂无评论";
+    list.appendChild(empty);
+  }
+
+  commentOverlay.hidden = false;
+  list.scrollTop = 0;
+
+  commentOverlay.querySelector(".ig-comments-close").focus();
+}
+
+commentOverlay.querySelector(".ig-comments-close")
+  .addEventListener("click", () => closeInstagramComments());
+
+commentOverlay.addEventListener("click", event => {
+  if (event.target === commentOverlay) {
+    closeInstagramComments();
+  }
+});
 })();
