@@ -33,23 +33,39 @@ if (calendarIconDay) {
   const solar =
     `${now.getMonth() + 1}月${now.getDate()}日${weekdays[now.getDay()]}`;
 
-  // 读取农历
-  const parts = new Intl.DateTimeFormat(
+// 读取农历；中文负责年月，英文格式负责数字日数
+let lunarText = "";
+
+try {
+  const chineseParts = new Intl.DateTimeFormat(
     "zh-CN-u-ca-chinese",
     { year: "numeric", month: "long", day: "numeric" }
   ).formatToParts(now);
 
-  const getPart = (type) =>
-    parts.find((part) => part.type === type)?.value ?? "";
+  const numericParts = new Intl.DateTimeFormat(
+    "en-US-u-ca-chinese-nu-latn",
+    { day: "numeric" }
+  ).formatToParts(now);
 
-  const year = getPart("yearName");
-  const month = getPart("month");
-  const day = Number(getPart("day"));
+  const year = chineseParts.find(
+    part => part.type === "yearName"
+  )?.value || "";
 
-  // 将农历日数转成“初一、十一、廿六”等形式
-  const numbers = ["", "一", "二", "三", "四", "五", "六", "七", "八", "九"];
+  const month = chineseParts.find(
+    part => part.type === "month"
+  )?.value || "";
+
+  const day = Number(
+    numericParts.find(part => part.type === "day")?.value
+  );
+
+  const numbers = [
+    "", "一", "二", "三", "四",
+    "五", "六", "七", "八", "九"
+  ];
 
   function lunarDay(n) {
+    if (!Number.isInteger(n) || n < 1 || n > 30) return "";
     if (n === 10) return "初十";
     if (n === 20) return "二十";
     if (n === 30) return "三十";
@@ -58,8 +74,17 @@ if (calendarIconDay) {
     return "廿" + numbers[n - 20];
   }
 
-  document.getElementById("date").textContent =
-    `${solar} · ${year}年${month}${lunarDay(day)}`;
+  const dayText = lunarDay(day);
+
+  if (month && dayText) {
+    lunarText = `${year ? year + "年" : ""}${month}${dayText}`;
+  }
+} catch (error) {
+  console.warn("农历日期读取失败", error);
+}
+
+document.getElementById("date").textContent =
+  lunarText ? `${solar} · ${lunarText}` : solar;
 }
 
 updateTime();
