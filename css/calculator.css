@@ -1,0 +1,242 @@
+/* 计算器 */
+#calculator-app {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  padding: 42px 12px 72px;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: right;
+  container-type: size;
+  touch-action: manipulation;
+}
+
+#calculator-app[hidden],
+#calculator-app [hidden] {
+  display: none !important;
+}
+
+.lock-screen.calculator-open > .status-bar {
+  z-index: 65;
+  color: #fff;
+}
+
+.calculator-top {
+  display: flex;
+  justify-content: space-between;
+  flex: none;
+  height: 40px;
+}
+
+#calculator-app button {
+  font-family: inherit;
+  color: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.calculator-top button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #444;
+  border-radius: 50%;
+  background: #222;
+}
+
+.calculator-top svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.calculator-display {
+  flex: 1;
+  min-height: 65px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 8px 6px 14px;
+}
+
+.calculator-expression {
+  min-height: 19px;
+  color: #999;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.calculator-result {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  font-size: 20cqw;
+  font-weight: 400;
+  line-height: 1.15;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.calculator-result.is-long {
+  font-size: 10cqw;
+}
+
+.calculator-keys {
+  flex: none;
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: min(100%, calc((100cqh - 130px) * .8));
+}
+
+.calculator-keys button {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-width: 0;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 50%;
+  background: #333;
+  font-size: 10cqw;
+  font-weight: 400;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,.12);
+}
+
+.calculator-keys button.is-function {
+  background: #616161;
+  font-size: 8cqw;
+}
+
+.calculator-keys button.is-operator {
+  background: #f69a2d;
+  font-size: 12cqw;
+}
+
+.calculator-keys button.is-selected {
+  background: #fff;
+  color: #f69a2d;
+}
+
+.calculator-keys button:active {
+  filter: brightness(1.4);
+}
+
+.calculator-keys svg {
+  width: 42%;
+  height: 42%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#calculator-app .calculator-home {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  touch-action: none;
+}
+
+.calculator-home::after {
+  content: "";
+  display: block;
+  width: 36%;
+  max-width: 140px;
+  height: 4px;
+  margin: auto;
+  border-radius: 5px;
+  background: #fff;
+}
+
+/* 历史记录 */
+.calculator-history {
+  position: absolute;
+  inset: 42px 0 72px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background: #111;
+  text-align: left;
+}
+
+.calculator-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: none;
+  gap: 8px;
+}
+
+.calculator-history-header button {
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+}
+
+.calculator-history-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.calculator-history-list button {
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  border: 0;
+  border-bottom: 1px solid #333;
+  background: transparent;
+  text-align: right;
+}
+
+.calculator-history-list small {
+  display: block;
+  margin-bottom: 5px;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.calculator-history-list strong {
+  font-size: 23px;
+  overflow-wrap: anywhere;
+}
+
+.calculator-history-list p {
+  color: #888;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  #calculator-app {
+    padding-top: 12px;
+  }
+
+  .lock-screen.calculator-open > .status-bar {
+    display: none;
+  }
+
+  .calculator-history {
+    top: 12px;
+  }
+}
