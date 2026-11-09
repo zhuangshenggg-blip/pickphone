@@ -592,11 +592,15 @@ if (secondaryItems.length) {
       updateCount();
       status.textContent = "";
     });
-  } else {
-    button.addEventListener("click", () => {
-      status.textContent = `${labels[action]}功能后续连接`;
-    });
-  }
+  } else if (action === "comment") {
+  button.addEventListener("click", () => {
+    openInstagramComments(post, button);
+  });
+} else {
+  button.addEventListener("click", () => {
+    status.textContent = `${labels[action]}功能后续连接`;
+  });
+}
 
   if (action === "save") {
   actions.appendChild(button);
