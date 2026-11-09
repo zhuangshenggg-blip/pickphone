@@ -114,6 +114,7 @@
   });
 
   function renderPage(page) {
+    closeInstagramComments(false);
     pauseInstagramVideos();
     closeOwnPostMenu();
     activePage = page;
@@ -225,6 +226,7 @@
   }
 
   function closeInstagram() {
+    closeInstagramComments(false);
     pauseInstagramVideos();
     closeOwnPostMenu();
     closeAccounts();
@@ -283,6 +285,12 @@
     if (app.hidden) return;
 
     if (event.key === "Escape") {
+      if (!commentOverlay.hidden) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            closeInstagramComments();
+            return;
+          }
       if (!ownPostMenu.hidden) {
          event.preventDefault();
          event.stopImmediatePropagation();
@@ -303,11 +311,13 @@
     }
 
     if (event.key === "Tab") {
-      const scope = !ownPostMenu.hidden
-        ? ownPostMenu
-        : accountOverlay.hidden
-          ? app
-          : accountOverlay;
+      const scope = !commentOverlay.hidden
+        ? commentOverlay
+        : !ownPostMenu.hidden
+            ? ownPostMenu
+            : accountOverlay.hidden
+              ? app
+              : accountOverlay;
       const controls = [...scope.querySelectorAll("button")]
         .filter((button) => button.getClientRects().length > 0);
 
