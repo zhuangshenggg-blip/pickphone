@@ -1775,3 +1775,164 @@
     height: 27px;
   }
 }
+/* 评论面板 */
+#instagram-app .ig-comments-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(0, 0, 0, .35);
+}
+
+#instagram-app .ig-comments-overlay[hidden],
+#instagram-app .ig-comment-replies[hidden] {
+  display: none;
+}
+
+.ig-comments-sheet {
+  width: 100%;
+  height: 76%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 9px 0 22px;
+  border-radius: 22px 22px 0 0;
+  background: white;
+  color: #111;
+  text-align: left;
+}
+
+.ig-comments-handle {
+  flex: none;
+  width: 32px;
+  height: 4px;
+  margin: 0 auto 8px;
+  border-radius: 5px;
+  background: #ccc;
+}
+
+.ig-comments-header {
+  position: relative;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.ig-comments-close {
+  position: absolute;
+  right: 10px;
+  top: 3px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 26px;
+}
+
+.ig-comments-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px 12px;
+}
+
+.ig-comment-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.ig-comment-row > img {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ig-comment-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.ig-comment-heading span {
+  color: #999;
+  font-size: 10px;
+}
+
+.ig-comment-body p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ig-comment-like {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 28px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: #888;
+  font-size: 10px;
+}
+
+#instagram-app .ig-comment-like svg {
+  width: 16px;
+  height: 16px;
+}
+
+.ig-comment-like[aria-pressed="true"] {
+  color: #ed4956;
+}
+
+.ig-comment-like[aria-pressed="true"] svg {
+  fill: currentColor;
+}
+
+.ig-comment-replies-toggle {
+  margin: 0 0 8px 44px;
+  padding: 5px 0;
+  border: 0;
+  background: transparent;
+  color: #888;
+  font-size: 11px;
+}
+
+.ig-comment-replies {
+  padding-left: 44px;
+}
+
+.ig-comment-row.is-reply > img {
+  width: 26px;
+  height: 26px;
+}
+
+.ig-comments-empty {
+  margin: 40px 0;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+}
