@@ -1975,3 +1975,876 @@
   font-weight: 400;
   line-height: 17px;
 }
+/* ===== 快拍播放器 ===== */
+#instagram-app .igs-viewer {
+  position: absolute;
+  inset: 0;
+  z-index: 180;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #090d12;
+  color: white;
+}
+
+#instagram-app .igs-viewer[hidden],
+#instagram-app .igs-viewer [hidden],
+#instagram-app .igs-panel[hidden] {
+  display: none !important;
+}
+
+#instagram-app .igs-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #16191e;
+  touch-action: pan-y;
+}
+
+#instagram-app .igs-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #111;
+}
+
+#instagram-app .igs-media-error {
+  position: absolute;
+  inset: 35% 15% auto;
+  color: #ddd;
+  text-align: center;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+#instagram-app .igs-progress {
+  position: absolute;
+  z-index: 3;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  gap: 3px;
+  pointer-events: none;
+}
+
+#instagram-app .igs-progress > span {
+  flex: 1;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(255,255,255,.35);
+}
+
+#instagram-app .igs-progress i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+#instagram-app .igs-heading {
+  position: absolute;
+  z-index: 4;
+  top: 21px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-bottom: 18px;
+  text-shadow: 0 1px 5px #0008;
+}
+
+#instagram-app .igs-avatar {
+  flex: none;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #555;
+}
+
+#instagram-app .igs-heading-info {
+  flex: 1;
+  min-width: 0;
+}
+
+#instagram-app .igs-heading-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#instagram-app .igs-heading button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: white;
+}
+
+#instagram-app .igs-author {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#instagram-app .igs-time {
+  color: #eee;
+  font-size: 11px;
+}
+
+#instagram-app .igs-repost {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+  font-size: 11px;
+}
+
+#instagram-app .igs-repost img {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#instagram-app .igs-heading .igs-close,
+#instagram-app .igs-heading .igs-pause {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 29px;
+}
+
+#instagram-app .igs-icon {
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#instagram-app .igs-footer {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 62px;
+  padding: 9px 12px 12px;
+  background: #090d12;
+}
+
+#instagram-app .igs-input {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #777;
+  border-radius: 25px;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 16px;
+}
+
+#instagram-app .igs-input::placeholder {
+  color: #eee;
+  font-size: 13px;
+}
+
+#instagram-app .igs-action {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 35px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: white;
+}
+
+#instagram-app .igs-action.is-liked {
+  color: #ff3040;
+}
+
+#instagram-app .igs-action.is-liked svg {
+  fill: currentColor;
+}
+
+#instagram-app .igs-send {
+  width: auto;
+  color: #a9b6ff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#instagram-app .igs-reactions {
+  position: absolute;
+  z-index: 5;
+  left: 12px;
+  right: 12px;
+  bottom: 76px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(8px);
+}
+
+#instagram-app .igs-reactions button {
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  font-size: 39px;
+}
+
+#instagram-app .igs-toast {
+  position: absolute;
+  z-index: 12;
+  top: 45%;
+  left: 50%;
+  max-width: 85%;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: #000c;
+  color: white;
+  text-align: center;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+/* 分享和他人主页 */
+#instagram-app .igs-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 190;
+  display: flex;
+  align-items: flex-end;
+  background: #0008;
+}
+
+#instagram-app .igs-sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 78%;
+  padding: 10px 15px 20px;
+  overflow: auto;
+  border-radius: 25px 25px 0 0;
+  background: white;
+  color: #111;
+}
+
+#instagram-app .igs-handle {
+  flex: none;
+  width: 35px;
+  height: 4px;
+  margin: 0 auto 13px;
+  border-radius: 4px;
+  background: #777;
+}
+
+#instagram-app .igs-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+#instagram-app .igs-sheet-header button {
+  padding: 6px;
+  border: 0;
+  background: transparent;
+  color: #444;
+}
+
+#instagram-app .igs-search {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 25px;
+  background: #f0f2f4;
+  color: #111;
+  font-size: 16px;
+}
+
+#instagram-app .igs-recipients {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 8px;
+  margin: 20px 0;
+}
+
+#instagram-app .igs-recipient {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  text-align: center;
+  font-size: 11px;
+}
+
+#instagram-app .igs-recipient img {
+  display: block;
+  width: 57px;
+  height: 57px;
+  margin: 0 auto 7px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#instagram-app .igs-recipient.is-selected img {
+  border-color: #6351ff;
+}
+
+#instagram-app .igs-recipient span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#instagram-app .igs-share-send {
+  padding: 11px;
+  border: 0;
+  border-radius: 12px;
+  background: #6351ff;
+  color: white;
+  font-size: 14px;
+}
+
+#instagram-app .igs-share-send:disabled {
+  opacity: .4;
+}
+
+#instagram-app .igs-share-tools {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+#instagram-app .igs-share-tools button {
+  padding: 10px;
+  border: 0;
+  border-radius: 15px;
+  background: #f0f2f4;
+  color: #111;
+  font-size: 12px;
+}
+
+#instagram-app .igs-profile-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 10px 0 18px;
+}
+
+#instagram-app .igs-profile-top img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#instagram-app .igs-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2px;
+  margin-top: 20px;
+}
+
+#instagram-app .igs-profile-grid img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+/* 快拍私信 */
+#instagram-app .igs-dm-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+#instagram-app .igs-dm-toolbar button {
+  padding: 5px;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-size: 22px;
+}
+
+#instagram-app .igs-dm-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 0;
+  border: 0;
+  border-bottom: 1px solid #eee;
+  background: transparent;
+  color: #111;
+  text-align: left;
+}
+
+#instagram-app .igs-dm-user img {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#instagram-app .igs-dm-user small {
+  display: block;
+  margin-top: 5px;
+  color: #888;
+}
+
+#instagram-app .igs-dm-record {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+#instagram-app .igs-dm-record small {
+  color: #888;
+  font-size: 11px;
+}
+
+#instagram-app .igs-dm-preview {
+  position: relative;
+  width: 100px;
+  padding: 0;
+  border: 0;
+  border-radius: 15px;
+  background: #eee;
+}
+
+#instagram-app .igs-dm-preview img,
+#instagram-app .igs-dm-preview video {
+  display: block;
+  width: 100%;
+  height: 170px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+#instagram-app .igs-dm-emoji {
+  position: absolute;
+  bottom: -5px;
+  left: -18px;
+  font-size: 36px;
+}
+
+#instagram-app .igs-dm-text {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: #6351ff;
+  color: white;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+#instagram-app .igs-dm-form {
+  display: flex;
+  gap: 8px;
+  padding: 15px 0;
+}
+
+#instagram-app .igs-dm-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 25px;
+  background: #f2f2f2;
+  color: #111;
+  font-size: 16px;
+}
+
+#instagram-app .igs-dm-form button {
+  border: 0;
+  background: transparent;
+  color: #6351ff;
+}
+
+/* 手机键盘弹出后，收紧快拍操作区 */
+#instagram-app .igs-viewer.is-composing .igs-stage {
+  min-height: 100px;
+}
+
+@media (max-width: 600px) {
+  #instagram-app .igs-heading {
+    top: 22px;
+  }
+
+  #instagram-app .igs-footer {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+}
+/* 看完快拍后的灰色头像圈 */
+#instagram-app .ig-story.is-seen .ig-story-ring {
+  background: #b8b8b8 !important;
+  border-color: #b8b8b8 !important;
+  box-shadow: none !important;
+}
+
+#instagram-app .ig-story.is-seen .ig-story-ring::before,
+#instagram-app .ig-story.is-seen .ig-story-ring::after {
+  background: #b8b8b8 !important;
+  border-color: #b8b8b8 !important;
+}
+
+/* 下拉刷新提示 */
+#instagram-app .ig-refresh-indicator {
+  position: absolute;
+  top: 92px;
+  left: 50%;
+  z-index: 150;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border: 1px solid #eee;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .96);
+  color: #555;
+  box-shadow: 0 3px 14px #0001;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+#instagram-app .ig-refresh-indicator[hidden] {
+  display: none !important;
+}
+
+#instagram-app .ig-content {
+  overscroll-behavior-y: contain;
+}
+
+@media (max-width: 600px) {
+  #instagram-app .ig-refresh-indicator {
+    top: 62px;
+  }
+}
+#instagram-app .ig-story.is-seen .ig-story-ring {
+  background: #b8b8b8 !important;
+  background-image: none !important;
+  border-color: #b8b8b8 !important;
+  box-shadow: none !important;
+}
+
+#instagram-app .ig-story.is-seen .ig-story-ring::before,
+#instagram-app .ig-story.is-seen .ig-story-ring::after {
+  background: transparent !important;
+  background-image: none !important;
+  border-color: #b8b8b8 !important;
+  box-shadow: none !important;
+}
+/* ===== 发布快拍 ===== */
+#instagram-app .igc-editor {
+  position: absolute;
+  inset: 0;
+  z-index: 220;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px 8px 18px;
+  background: #000;
+  color: white;
+}
+
+#instagram-app .igc-editor[hidden],
+#instagram-app .igc-editor [hidden] {
+  display: none !important;
+}
+
+#instagram-app .igc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex: none;
+  min-height: 42px;
+}
+
+#instagram-app .igc-editor button {
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#instagram-app .igc-close {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: #333c;
+  color: #fff;
+  font-size: 27px;
+}
+
+#instagram-app .igc-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #161616;
+}
+
+#instagram-app .igc-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#instagram-app .igc-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+  height: 100%;
+  padding: 25px;
+  text-align: center;
+}
+
+#instagram-app .igc-photo-button {
+  padding: 13px 24px;
+  border: 0;
+  border-radius: 25px;
+  background: #292929;
+  color: white;
+}
+
+#instagram-app .igc-tools {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+#instagram-app .igc-tools button {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #444c;
+  color: white;
+  font-size: 21px;
+  backdrop-filter: blur(8px);
+}
+
+#instagram-app .igc-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: calc(100% - 24px);
+  padding: 8px;
+  border: 0;
+  outline: none;
+  background: #0004;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+}
+
+#instagram-app .igc-caption::placeholder {
+  color: white;
+}
+
+#instagram-app .igc-music-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  max-width: calc(100% - 76px);
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 18px;
+  background: #333b;
+  color: white;
+  text-align: left;
+  font-size: 11px;
+}
+
+#instagram-app .igc-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr 42px;
+  gap: 7px;
+  flex: none;
+  padding: 13px 0 0;
+}
+
+#instagram-app .igc-bottom button {
+  min-height: 41px;
+  padding: 8px;
+  border: 0;
+  border-radius: 25px;
+  background: #292929;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#instagram-app .igc-bottom .igc-close-friends {
+  color: #6fe37f;
+}
+
+#instagram-app .igc-bottom .igc-next {
+  background: #5160ff;
+  font-size: 23px;
+}
+
+#instagram-app .igc-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  background: #0008;
+}
+
+#instagram-app .igc-sheet {
+  width: 100%;
+  max-height: 85%;
+  padding: 17px;
+  overflow-y: auto;
+  border-radius: 22px 22px 0 0;
+  background: #222;
+}
+
+#instagram-app .igc-sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+#instagram-app .igc-sheet-header button {
+  border: 0;
+  background: transparent;
+  color: #a9b6ff;
+}
+
+#instagram-app .igc-field {
+  display: grid;
+  gap: 8px;
+  margin: 13px 0;
+  font-size: 13px;
+}
+
+#instagram-app .igc-field input,
+#instagram-app .igc-field textarea,
+#instagram-app .igc-field select {
+  width: 100%;
+  min-height: 38px;
+  padding: 9px;
+  border: 1px solid #555;
+  border-radius: 9px;
+  background: #333;
+  color: white;
+  font: inherit;
+  font-size: 16px;
+  color-scheme: dark;
+}
+
+#instagram-app .igc-field input[type="color"] {
+  padding: 3px;
+}
+
+#instagram-app .igc-field input[type="range"] {
+  padding: 0;
+}
+
+#instagram-app .igc-save {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px;
+  border: 0;
+  border-radius: 12px;
+  background: #5661ff;
+  color: white;
+}
+
+#instagram-app .igc-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #444;
+  font-size: 13px;
+}
+
+#instagram-app .igc-status {
+  flex: none;
+  min-height: 18px;
+  margin: 5px 0 0;
+  color: #aaa;
+  text-align: center;
+  font-size: 11px;
+}
+
+#instagram-app .igc-own-badge {
+  position: absolute;
+  z-index: 4;
+  bottom: 12px;
+  left: 12px;
+  max-width: 85%;
+  padding: 6px 10px;
+  border-radius: 15px;
+  background: #0008;
+  color: white;
+  font-size: 11px;
+}
+
+#instagram-app .igc-view-mentions {
+  position: absolute;
+  z-index: 4;
+  bottom: 48px;
+  left: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+#instagram-app .igc-view-mentions button {
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  font-size: 11px;
+}
