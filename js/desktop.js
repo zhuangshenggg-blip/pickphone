@@ -79,7 +79,7 @@ folderData.forEach((folder) => {
   folder.apps.forEach((app) => {
   const mini = document.createElement("img");
   mini.className = "mini-icon";
-  mini.src = `./assets/icons/${app[0]}.PNG`;
+  mini.src = `./assets/icons/${app[0]}.${app[0] === "settings" ? "png" : "PNG"}`;
   mini.alt = "";
   mini.draggable = false;
   preview.appendChild(mini);
@@ -111,7 +111,7 @@ function openFolder(folder) {
 
     const icon = document.createElement("img");
 icon.className = "app-icon app-image";
-icon.src = `./assets/icons/${id}.PNG`;
+icon.src = `./assets/icons/${id}.${id === "settings" ? "png" : "PNG"}`;
 icon.alt = "";
 icon.draggable = false;
 

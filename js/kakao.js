@@ -735,6 +735,12 @@ function renderFriendList() {
     );
   });
 
+  const favoriteStory = phone.dataset.story || "default";
+  visibleFriends.sort((a, b) =>
+    Number(infoFavorites.has(`${favoriteStory}:${b.chatId}`)) -
+    Number(infoFavorites.has(`${favoriteStory}:${a.chatId}`))
+  );
+
   visibleFriends.forEach((friend) => {
     const wrapper = document.createElement("div");
     wrapper.className = "kakao-friend-edit-row";
@@ -757,6 +763,16 @@ function renderFriendList() {
     const name = document.createElement("div");
     name.className = "kakao-friend-name";
     name.textContent = friend.name;
+    const isFavorite = infoFavorites.has(`${favoriteStory}:${friend.chatId}`);
+    row.classList.toggle("is-favorite", isFavorite);
+    if (isFavorite) {
+      const star = document.createElement("span");
+      star.textContent = " ★";
+      star.style.color = "#efb539";
+      star.style.fontSize = "12px";
+      star.setAttribute("aria-label", "收藏联系人");
+      name.appendChild(star);
+    }
     info.appendChild(name);
 
     if (friend.status) {
@@ -1832,24 +1848,31 @@ infoScrollResizeObserver.observe(app);
 // 每个故事线、每个聊天分别记录收藏状态
 // 从当前浏览器读取收藏记录
 const favoritesStorageKey = "pickphone.kkt.favorites.v1";
-
-let savedFavorites = [];
-
+// 仅新初始状态使用：内撒浪对应 dream-player；彩领对应 chaeryeong。
+const defaultFavoriteKeys = ["dream:dream-player", "cp:chaeryeong"];
+let savedFavorites = [...defaultFavoriteKeys];
+let initializeFavorites = true;
 try {
-  const saved = JSON.parse(
-    localStorage.getItem(favoritesStorageKey) || "[]"
-  );
-
-  if (Array.isArray(saved)) {
-    savedFavorites = saved.filter(
-      (item) => typeof item === "string"
-    );
+  const raw = localStorage.getItem(favoritesStorageKey);
+  if (raw !== null) {
+    const saved = JSON.parse(raw);
+    if (Array.isArray(saved)) {
+      // 包括空数组：保留用户手动取消收藏后的选择。
+      savedFavorites = saved.filter(item => typeof item === "string");
+      initializeFavorites = false;
+    }
   }
 } catch {
-  savedFavorites = [];
+  savedFavorites = [...defaultFavoriteKeys];
 }
-
 const infoFavorites = new Set(savedFavorites);
+if (initializeFavorites) {
+  try {
+    localStorage.setItem(favoritesStorageKey, JSON.stringify([...infoFavorites]));
+  } catch {
+    // 禁止存储时，当前页面仍保留初始收藏。
+  }
+}
 
 const favoriteButton =
   document.getElementById("kakao-info-favorite");

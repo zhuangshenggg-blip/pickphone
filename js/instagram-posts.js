@@ -121,19 +121,50 @@ window.INSTAGRAM_POSTS = [
     shares: 7059
   },
 ];
-// 快拍栏资料，头像路径之后自行替换
+// 每个用户的 items 数组就是该用户发布的多条快拍。
+// src 支持图片和 mp4 视频。
+// duration 单位为秒，图片默认 5 秒。
+// repost 是可选的转发来源，没有就删除该项。
 window.INSTAGRAM_STORIES = [
   {
     username: "momo",
-    avatar: ""
+    name: "MOMO",
+    avatar: "",
+    verified: true,
+    bio: "TWICE",
+    followers: "千万",
+    following: 0,
+
+    // 暂无快拍照片，上传素材后在此添加。
+    items: []
   },
+
   {
     username: "nayeonyny",
-    avatar: ""
+    name: "NAYEON",
+    avatar: "",
+    verified: true,
+    bio: "TWICE",
+
+    items: [
+      {
+        id: "nayeon-story-01",
+        src: "./assets/instagram/stories/nayeon/01.jpeg",
+        time: "3小时",
+        duration: 5
+      }
+    ]
   },
+
   {
     username: "m.by__sana",
-    avatar: ""
+    name: "SANA",
+    avatar: "",
+    verified: true,
+    bio: "TWICE",
+
+    // 暂无快拍照片，上传素材后在此添加。
+    items: []
   }
 ];
 
