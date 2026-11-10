@@ -5,6 +5,7 @@
   if (!phone || !desktop) return;
 
   // 计算逻辑：不使用 eval
+
   function createCalculator() {
     let entry = "0";
     let held = null;
