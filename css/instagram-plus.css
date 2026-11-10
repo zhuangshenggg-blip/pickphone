@@ -390,3 +390,19 @@
     height: 46px;
   }
 }
+/* 从个人主页打开的帖子详情 */
+#instagram-app .igp-post-detail > .igp-body {
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#instagram-app .igp-post-detail .ig-post {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#instagram-app .igp-post-detail > .igp-bar {
+  flex-shrink: 0;
+  border-bottom: 1px solid #eee;
+}
