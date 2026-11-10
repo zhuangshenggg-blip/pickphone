@@ -439,9 +439,9 @@ function instagramPostStateKey(post) {
   return `${storyKey()}:${currentAccount().id}:${post.id}`;
 }
 
-function renderInstagramHome() {
-    renderInstagramStories();
-  const posts = plusVisiblePosts();
+function renderInstagramHome(target = content, selectedPosts = null) {
+  if (selectedPosts === null) renderInstagramStories();
+  const posts = selectedPosts ?? plusVisiblePosts();
 
   if (!posts.length) {
     const empty = document.createElement("section");
@@ -451,7 +451,7 @@ function renderInstagramHome() {
         <p>之后在帖子资料中添加内容</p>
       </section>
     `;
-    content.appendChild(empty);
+    target.appendChild(empty);
     return;
   }
 
@@ -746,7 +746,7 @@ card.addEventListener("ig-photo-change", (event) => {
   }
 });
    card.append(actions, caption, time, status);
-    content.appendChild(card);
+    target.appendChild(card);
   });
 }
 function formatInstagramCount(value) {
@@ -3385,7 +3385,20 @@ function renderPlusCollection(kind){
   plusGrid(plusVisiblePosts(true).filter(p=>kind==='saved'?s.saved.includes(instagramPostStateKey(p)):s.archived.includes(p.id)),grid);
 }
 function renderPlusReposts(){renderPage('saved');content.querySelector('h2').textContent='我的转发';const grid=content.querySelector('[data-grid]');grid.replaceChildren();plusGrid(plusVisiblePosts().filter(p=>plusState().reposts.includes(p.id)),grid);}
-function openPlusPost(post){const body=plusSheet('帖子',`<header class="igp-bar"><button data-user>@${plusEsc(post.username)}</button><button data-more aria-label="帖子菜单">⋯</button></header><div data-gallery></div><p>${plusEsc(post.caption||'')}</p><small>${plusEsc(post.time||'')}</small><div class="igp-post-actions"><button data-like aria-pressed="${instagramLikedPosts.has(instagramPostStateKey(post))}">♡ 点赞</button><button data-comment>评论</button><button data-share>分享</button><button data-save>收藏</button></div>`,true);const gallery=createInstagramPostGallery(post);body.querySelector('[data-gallery]').appendChild(gallery);body.querySelector('[data-user]').onclick=()=>openPlusProfile(post.username);body.querySelector('[data-more]').onclick=()=>{closePlusModal(false);openPlusPostMenu(post);};body.querySelector('[data-like]').onclick=e=>{const k=instagramPostStateKey(post);if(instagramLikedPosts.has(k))instagramLikedPosts.delete(k);else instagramLikedPosts.add(k);plusSaveInteractions();e.currentTarget.setAttribute('aria-pressed',String(instagramLikedPosts.has(k)));e.currentTarget.textContent=instagramLikedPosts.has(k)?'♥ 已点赞':'♡ 点赞';};body.querySelector('[data-save]').onclick=e=>{const k=instagramPostStateKey(post);if(instagramSavedPosts.has(k))instagramSavedPosts.delete(k);else instagramSavedPosts.add(k);plusSaveInteractions();e.currentTarget.textContent=instagramSavedPosts.has(k)?'已收藏':'收藏';};body.querySelector('[data-comment]').onclick=()=>{closePlusModal(false);openInstagramComments(post,null);};body.querySelector('[data-share]').onclick=()=>openPlusShare(post);plusModalCleanup=()=>body.querySelectorAll('video').forEach(v=>v.pause());}
+function openPlusPost(post) {
+  const body = plusSheet("帖子", "", true);
+  const sheet = body.closest(".igp-sheet");
+
+  sheet.classList.add("igp-post-detail");
+
+  // 直接使用首页的完整帖子样式和交互。
+  renderInstagramHome(body, [post]);
+
+  // 退出详情时停止视频播放。
+  plusModalCleanup = () => {
+    body.querySelectorAll("video").forEach(video => video.pause());
+  };
+}
 function openPlusPostMenu(post){const body=plusSheet('帖子选项','');if(post.username===currentAccount().username){[['edit','编辑'],['archive',plusState().archived.includes(post.id)?'移出私密文件夹':'收入私密文件夹'],['pin','置顶 / 取消置顶'],['heart','显示 / 隐藏获赞数'],['comment','开启 / 关闭评论'],['trash','删除']].forEach(([a,l])=>plusCardButton(l,()=>handlePlusPostAction(a,post),body));}else{plusCardButton('查看主页',()=>openPlusProfile(post.username),body);plusCardButton('隐藏该用户的帖子',()=>{plusState().hiddenUsers.push(post.username);plusCommit();closePlusModal(false);renderPage('home');},body);}plusCardButton('分享',()=>openPlusShare(post),body);}
 function handlePlusPostAction(action,post){const s=plusState();if(action==='facebook'||action==='share-link')return openPlusShare(post);if(action==='chart'){plusSheet('帖子数据',`<p>点赞：${formatInstagramCount((Number(post.likes)||0)+Number(instagramLikedPosts.has(instagramPostStateKey(post))))}</p><p>评论：${(Number(post.comments)||0)+plusCommentCount(post)}</p><p>转发：${(Number(post.reposts)||0)+Number(s.reposts.includes(post.id))}</p><p>分享：${Number(post.shares)||0}</p><p class="igp-hint">基础数据来自帖子资料，新增互动来自当前模拟账号。</p>`);return;}if(action==='edit')return openPlusPostEditor(post,post.type==='reel');if(action==='trash'){const body=plusSheet('删除帖子',`<p>从当前模拟账号中删除此帖子？</p><button class="igp-primary" data-confirm>删除</button>`);body.querySelector('[data-confirm]').onclick=()=>{s.deleted.push(post.id);plusCommit();closePlusModal(false);renderPage('profile');};return;}if(action==='archive'){s.archived=s.archived.includes(post.id)?s.archived.filter(id=>id!==post.id):[...s.archived,post.id];}else{const field={pin:'pinned',heart:'hideLikes',share:'hideShares',comment:'commentsDisabled'}[action];if(!field)return;s.overrides[post.id]={...s.overrides[post.id],[field]:!post[field]};}plusCommit();closePlusModal(false);renderPage('profile');plusToast('已更新');}
 function openPlusShare(post){const selected=new Set(),body=plusSheet('分享帖子',`<input class="igp-input" type="search" placeholder="搜索联系人" aria-label="搜索联系人"><div class="igs-recipients"></div><button class="igp-primary" data-send disabled>发送</button><button class="igp-row" data-copy>复制链接</button><p data-note role="status"></p>`);const list=body.querySelector('.igs-recipients'),send=body.querySelector('[data-send]'),input=body.querySelector('input');function update(){list.replaceChildren();plusUsers().filter(u=>u.username!==currentAccount().username&&`${u.username} ${u.name}`.toLowerCase().includes(input.value.toLowerCase())).forEach(u=>{const b=document.createElement('button');b.className='igs-recipient';b.type='button';b.classList.toggle('is-selected',selected.has(u.username));b.setAttribute('aria-pressed',String(selected.has(u.username)));b.innerHTML=`<img src="${plusEsc(plusAvatar(u.avatar))}" alt=""><span>${plusEsc(u.name||u.username)}</span>`;b.onclick=()=>{if(selected.has(u.username))selected.delete(u.username);else selected.add(u.username);update();};list.appendChild(b);});send.disabled=!selected.size;send.textContent=selected.size?`发送（${selected.size}）`:'发送';}input.oninput=update;update();send.onclick=async()=>{send.disabled=true;const s=plusState();selected.forEach(to=>s.messages.push({id:plusID(),to,type:'post',text:'',post:{id:post.id,username:post.username,src:getInstagramPostImages(post)[0],caption:post.caption||''},createdAt:Date.now()}));if(await plusCommit()){closePlusModal(false);plusToast('已分享到私信');}};body.querySelector('[data-copy]').onclick=()=>plusCopy(new URL('?igPost='+encodeURIComponent(post.id),location.href).href);}
