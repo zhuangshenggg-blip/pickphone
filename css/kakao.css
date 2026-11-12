@@ -5101,10 +5101,10 @@ button.kakao-composer-plus {
 }
 
 #kakao-app.in-conversation .kakao-message-bubble {
-  padding: 6px 10px;
+  padding: 8px 10px;
   border-radius: 13px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.4;
 }
 
