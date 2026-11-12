@@ -47,7 +47,7 @@ window.KAKAO_STORY_DATA = {
       {"mine": false, "text": "好辛苦 언니 화이팅！", "date": "2026-05-16", "time": "20:42"},
       {"mine": true, "text": "我到公司啦 排练完再聊", "date": "2026-05-16", "time": "20:42"},
       {"mine": true, "text": "排练完啦 好累😔", "date": "2026-05-16", "time": "22:50"},
-      {mine: true,type:"image",src: "./assets/kakao/photo/message-1/1-1.jpg",date: "2026-05-16",time: "22:50"},//在车上的自拍
+      {mine: true,type:"image",src: "./assets/kakao/photo/message-1/1-2.JPG",date: "2026-05-16",time: "22:50"},//在车上的自拍
       {"mine": true, "text": "在车上", "date": "2026-05-16", "time": "22:50"},
       {"mine": false, "text": "🫂언니 辛苦啦", "date": "2026-05-16", "time": "22:51"},
       {"mine": false, "text": "那家咖啡店的蛋糕确实好吃", "date": "2026-05-16", "time": "22:51"},
