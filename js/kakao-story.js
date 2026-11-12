@@ -9,7 +9,7 @@ window.KAKAO_STORY_DATA = {
       {mine: false,text: "언니 我刚刚到家",date: "2026-05-09",time: "17:32"},
       {mine: false,text: "那只小狗现在怎么样了？",date: "2026-05-09",time: "17:32"},
       {mine: true,type:"image",src: "./assets/kakao/photo/message-1/1-1.jpg",date: "2026-05-09",time: "17:32"},
-      {mine: true,text: "睡着了呢ㅋㅋ",date: "2026-05-09",time: "17:32"},
+      {mine: true,text: "在趴着 小小一个ㅋㅋ",date: "2026-05-09",time: "17:32"},
       {mine: false,text: "好可爱！",date: "2026-05-09",time: "17:33"},
       {mine: true,text: "下次活动我们一起去看看它吧",date: "2026-05-09",time: "17:33"},
       {mine: false,text: "好呀",date: "2026-05-09",time: "17:33"},
