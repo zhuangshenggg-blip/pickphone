@@ -366,7 +366,20 @@ removedChats.delete(removedChatKey(chat.id));
   
   let previousMessageDate = null;
 
-conversation.messages.forEach((message) => {
+const sameMessageGroup = (first, second) => Boolean(
+  first && second &&
+  (first.date || getMessageDate()) === (second.date || getMessageDate()) &&
+  /^\d{2}:\d{2}$/.test(first.time || "") &&
+  first.time === second.time &&
+  Boolean(first.mine) === Boolean(second.mine) &&
+  (first.mine || chat.type !== "group" || (
+    first.sender && first.sender === second.sender
+  ))
+);
+
+conversation.messages.forEach((message, index, allMessages) => {
+  const continuesGroup = sameMessageGroup(allMessages[index - 1], message);
+  const hasNext = sameMessageGroup(message, allMessages[index + 1]);
   const messageDate = message.date || getMessageDate();
 
   if (messageDate !== previousMessageDate) {
@@ -379,8 +392,12 @@ conversation.messages.forEach((message) => {
   }
     const row = document.createElement("div");
     row.className = message.mine
-      ? "kakao-message-row mine"
-      : "kakao-message-row";
+  ? "kakao-message-row mine"
+  : "kakao-message-row";
+
+// 添加下面两行
+row.classList.toggle("is-continuation", continuesGroup);
+row.classList.toggle("has-next", hasNext);
 
     if (!message.mine) {
       const avatar = document.createElement("img");
@@ -505,7 +522,7 @@ conversation.messages.forEach((message) => {
     row.append(group);
 
     // 只显示格式为“小时:分钟”的消息时间
-    if (/^\d{2}:\d{2}$/.test(message.time || "")) {
+    if (!hasNext && /^\d{2}:\d{2}$/.test(message.time || "")) {
       const clock = document.createElement("span");
       clock.className = "kakao-message-clock";
       clock.textContent = message.time;
