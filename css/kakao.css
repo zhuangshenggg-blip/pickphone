@@ -5012,3 +5012,223 @@ button.kakao-composer-plus {
     height: 26px;
   }
 }
+/* KakaoTalk 聊天详情 */
+#kakao-app.in-conversation {
+  --kkt-glass: rgba(224, 244, 255, .72);
+  background: #aec2cf;
+  color: #20292f;
+}
+
+/* 顶部：返回、昵称、工具 */
+#kakao-app.in-conversation .kakao-conversation-header {
+  grid-template-columns: 66px minmax(0, 1fr) 103px;
+  gap: 6px;
+  height: 53px;
+  padding: 4px 10px 8px;
+  background: linear-gradient(#cbdce6, #bfd2df);
+}
+
+#kakao-app.in-conversation .kakao-conversation-title {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+#kakao-app.in-conversation .kakao-conversation-back,
+#kakao-app.in-conversation .kakao-conversation-tools {
+  box-sizing: border-box;
+  height: 38px;
+  border: 1px solid rgba(73, 107, 130, .24);
+  border-radius: 24px;
+  background: var(--kkt-glass) !important;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .8);
+}
+
+#kakao-app.in-conversation .kakao-conversation-back {
+  width: 100%;
+}
+
+#kakao-app.in-conversation .kakao-conversation-back span {
+  font-size: 14px;
+}
+
+#kakao-app.in-conversation .kakao-conversation-tools button {
+  width: 32%;
+  height: 100%;
+}
+
+#kakao-app.in-conversation .kakao-conversation-header svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 消息：字号、气泡、头像、时间 */
+#kakao-app.in-conversation .kakao-messages {
+  padding: 8px 10px 12px;
+}
+
+#kakao-app.in-conversation .kakao-message-row {
+  column-gap: 5px;
+  margin-bottom: 10px;
+}
+
+#kakao-app.in-conversation .kakao-message-row.has-next {
+  margin-bottom: 5px;
+}
+
+#kakao-app.in-conversation .kakao-message-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+}
+
+#kakao-app.in-conversation .is-continuation .kakao-message-avatar {
+  visibility: hidden;
+}
+
+#kakao-app.in-conversation .is-continuation .kakao-message-name {
+  display: none;
+}
+
+#kakao-app.in-conversation .kakao-message-group {
+  max-width: min(76%, calc(100% - 80px));
+}
+
+#kakao-app.in-conversation .kakao-message-name {
+  margin-bottom: 3px;
+  color: #273640;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+#kakao-app.in-conversation .kakao-message-bubble {
+  padding: 6px 10px;
+  border-radius: 13px;
+  font-size: 15px;
+  line-height: 1.42;
+}
+
+#kakao-app.in-conversation .kakao-message-bubble:is(.kakao-image-bubble, .kakao-location-bubble) {
+  padding: 0;
+}
+
+#kakao-app.in-conversation .kakao-message-clock {
+  padding-bottom: 2px;
+  color: #3d4d58;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+#kakao-app.in-conversation .kakao-message-date {
+  margin: 10px auto 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(75, 107, 126, .13);
+  color: #273640;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* 定位卡片 */
+#kakao-app.in-conversation .kakao-location-card {
+  width: 170px;
+}
+
+#kakao-app.in-conversation .kakao-location-map {
+  height: 77px;
+}
+
+#kakao-app.in-conversation .kakao-location-info {
+  padding: 7px 9px;
+}
+
+#kakao-app.in-conversation .kakao-location-info strong {
+  font-size: 13px;
+}
+
+#kakao-app.in-conversation .kakao-location-info span {
+  color: #5b6269;
+  font-size: 11px;
+}
+
+/* 底部输入栏 */
+#kakao-app.in-conversation .kakao-composer {
+  grid-template-columns: 31px minmax(0, 1fr) 28px;
+  gap: 6px;
+  min-height: 43px;
+  margin: 0 9px 4px;
+  padding: 5px 6px;
+  border: 1px solid rgba(83, 112, 132, .26);
+  border-radius: 25px;
+  background: var(--kkt-glass);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .8);
+}
+
+#kakao-app.in-conversation .kakao-composer-plus {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: #fff;
+  color: #172029;
+  font-size: 21px;
+}
+
+#kakao-app.in-conversation #kakao-choose-reply {
+  padding: 5px 2px;
+  border: 0;
+  background: transparent;
+  color: #243746;
+  font-size: 13px;
+  text-align: left;
+}
+
+#kakao-app.in-conversation #kakao-choose-reply:disabled,
+#kakao-app.in-conversation .kakao-composer-smile {
+  color: #455865;
+  opacity: 1;
+}
+
+#kakao-app.in-conversation #kakao-home {
+  background: transparent;
+}
+
+@media (max-width: 600px) {
+  #kakao-app.in-conversation {
+    padding-top: 8px;
+    padding-bottom: calc(42px + env(safe-area-inset-bottom, 0px));
+  }
+
+  #kakao-app.in-conversation .kakao-conversation-header {
+    grid-template-columns: 82px minmax(0, 1fr) 122px;
+    height: 58px;
+    padding-inline: 14px;
+  }
+
+  #kakao-app.in-conversation .kakao-conversation-back,
+  #kakao-app.in-conversation .kakao-conversation-tools {
+    height: 43px;
+  }
+
+  #kakao-app.in-conversation .kakao-conversation-title {
+    font-size: 19px;
+  }
+
+  #kakao-app.in-conversation .kakao-composer {
+    min-height: 47px;
+  }
+
+  #kakao-app.in-conversation #kakao-home {
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    height: 32px;
+  }
+
+  #kakao-app.in-conversation #kakao-home::after {
+    bottom: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  #kakao-app.in-conversation .kakao-conversation-header {
+    grid-template-columns: 64px minmax(0, 1fr) 99px;
+    padding-inline: 9px;
+  }
+}
