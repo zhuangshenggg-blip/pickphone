@@ -3,170 +3,63 @@ window.KAKAO_STORY_DATA = {
   "dream-player": {
     // 打开聊天时已有的消息
     initialMessages: [
-      {
-        mine: true,
-        text: "oo 到家了吗？",
-        date: "2026-05-09",
-        time: "17:30"
-      },
-      {
-        mine: true,
-        text: "刚刚工作人员给我传了那只小狗的照片 你要看看吗？",
-        date: "2026-05-09",
-        time: "17:31"
-      },
-      {
-        mine: false,
-        text: "欧尼 我刚刚到家",
-        date: "2026-05-09",
-        time: "17:32"
-      },
-      {
-        mine: false,
-        text: "那只小狗现在怎么样了？",
-        date: "2026-05-09",
-        time: "17:32"
-      },
-      {
-        mine: true,
-        type:"image",
-        src: "./assets/kakao/photo/message-1/1-1.jpg",
-        date: "2026-05-09",
-        time: "17:32"
-      },
-      {
-        mine: false,
-        text: "好可爱！",
-        date: "2026-05-09",
-        time: "17:33"
-      },
-      {
-        mine: true,
-        text: "下次活动我们一起去看看它吧",
-        date: "2026-05-09",
-        time: "17:33"
-      },
-      {
-        mine: false,
-        text: "好呀",
-        date: "2026-05-09",
-        time: "17:33"
-      },
-      {
-        mine: false,
-        text: "一直没有人领养它",
-        date: "2026-05-09",
-        time: "17:33"
-      },
-      {
-        mine: false,
-        text: "好可怜ㅠㅠ",
-        date: "2026-05-09",
-        time: "17:34"
-      },
-      {
-        mine: true,
-        text: "活动上我会努力给它找领养的！",
-        date: "2026-05-09",
-        time: "17:35"
-      },
-      {
-        mine: true,
-        text: "oo 下次活动定在了5.16 你有时间来吗？",
-        date: "2026-05-13",
-        time: "10:10"
-      },
-      {
-        mine: false,
-        text: "欧尼稍等 我去确认一下",
-        date: "2026-05-13",
-        time: "10:12"
-      },
-      {
-        mine: false,
-        text: "那天刚好是周末 我可以去！",
-        date: "2026-05-13",
-        time: "10:14"
-      },
-      {
-        mine: false,
-        text: "欧尼 你去吗",
-        date: "2026-05-13",
-        time: "10:14"
-      },
-      {
-        mine: true,
-        text: "응!我也会去的",
-        date: "2026-05-13",
-        time: "10:15"
-      },
-      {
-        mine: true,
-        text: "那个...",
-        date: "2026-05-13",
-        time: "10:15"
-      },
-      {
-        mine: true,
-        text: "结束后你有时间吗",
-        date: "2026-05-13",
-        time: "10:15"
-      },
-      {
-        mine: true,
-        text: "收容所旁边有一家咖啡店的蛋糕很好吃",
-        date: "2026-05-13",
-        time: "10:15"
-      },
-      {
-        mine: true,
-        text: "要不要一起去？",
-        date: "2026-05-13",
-        time: "10:16"
-      },
-      {
-        mine: false,
-        text: "好呀好呀",
-        date: "2026-05-13",
-        time: "10:17"
-      },
-      {
-        mine: false,
-        text: "那欧尼我们约好了哦 不见不散",
-        date: "2026-05-13",
-        time: "10:17"
-      },
-      {
-        mine: true,
-        type: "location",
-        name: "카공족 길음점",
-        address: "서울 성북구 동소문로 305-1 1동 301호",
-        date: "2026-05-13",
-        time: "10:23"
-      },
-      {
-        mine: true,
-        text: "不见不散^^",
-        date: "2026-05-13",
-        time: "10:24"
-      },
+      // 2026-05-09
+      {mine: true,text: "oo 到家了吗？",date: "2026-05-09",time: "17:30"},
+      {mine: true,text: "刚刚工作人员给我传了那只小狗的照片 你要看看吗？",date: "2026-05-09",time: "17:31"},
+      {mine: false,text: "언니 我刚刚到家",date: "2026-05-09",time: "17:32"},
+      {mine: false,text: "那只小狗现在怎么样了？",date: "2026-05-09",time: "17:32"},
+      {mine: true,type:"image",src: "./assets/kakao/photo/message-1/1-1.jpg",date: "2026-05-09",time: "17:32"},
+      {mine: true,text: "睡着了呢ㅋㅋ",date: "2026-05-09",time: "17:32"},
+      {mine: false,text: "好可爱！",date: "2026-05-09",time: "17:33"},
+      {mine: true,text: "下次活动我们一起去看看它吧",date: "2026-05-09",time: "17:33"},
+      {mine: false,text: "好呀",date: "2026-05-09",time: "17:33"},
+      {mine: false,text: "一直没有人领养它",date: "2026-05-09",time: "17:33"},
+      {mine: false,text: "好可怜ㅠㅠ",date: "2026-05-09",time: "17:34"},
+      {mine: true,text: "活动上我会努力给它找领养的！",date: "2026-05-09",time: "17:35"},
+      // 2026-05-13
+      {mine: true,text: "oo 下次活动定在了5.16 你有时间来吗？",date: "2026-05-13",time: "10:10"},
+      {mine: false,text: "欧尼稍等 我去确认一下",date: "2026-05-13",time: "10:12"},
+      {mine: false,text: "那天刚好是周末 我可以去！",date: "2026-05-13",time: "10:14"},
+      {mine: false,text: "欧尼 你去吗",date: "2026-05-13",time: "10:14"},
+      {mine: true,text: "응!我也会去的",date: "2026-05-13",time: "10:15"},
+      {mine: true,text: "那个...",date: "2026-05-13",time: "10:15"},
+      {mine: true,text: "结束后你有时间吗",date: "2026-05-13",time: "10:15"},
+      {mine: true,text: "收容所旁边有一家咖啡店的蛋糕很好吃",date: "2026-05-13",time: "10:15"},
+      {mine: true,text: "要不要一起去？",date: "2026-05-13",time: "10:16"},
+      {mine: false,text: "好呀好呀",date: "2026-05-13",time: "10:17"},
+      {mine: false,text: "那欧尼我们约好了哦 不见不散",date: "2026-05-13",time: "10:17"},
+      {mine: true,type: "location",name: "카공족 길음점",address: "서울 성북구 동소문로 305-1 1동 301호",date: "2026-05-13",time: "10:23"},
+      {mine: true,text: "不见不散^^",date: "2026-05-13",time: "10:24"},
       // 2026-05-16
-      {"mine": true, "text": "수이야 出门了吗", "date": "2026-05-16", "time": "09:18"},
-      {"mine": false, "text": "刚出地铁站！我是不是从2号口出来？", "date": "2026-05-16", "time": "09:18"},
-      {"mine": true, "text": "对，我在收容所门口。你看到有个戴帽子的人抱着一摞纸箱就是我", "date": "2026-05-16", "time": "09:19"},
-      {"mine": false, "text": "看到了ㅋㅋ 欧尼你先别动 我来帮你", "date": "2026-05-16", "time": "09:19"},
+      {"mine": true, "text": "oo 出门了吗？", "date": "2026-05-16", "time": "09:18"},
+      {"mine": false, "text": "刚出地铁站 我在二号口", "date": "2026-05-16", "time": "09:18"},
+      {"mine": true, "text": "我在收容所门口 戴着帽子那个", "date": "2026-05-16", "time": "09:19"},
+      {"mine": false, "text": "看到了ㅋㅋ 这就过来", "date": "2026-05-16", "time": "09:19"},
       {"mine": false, "text": "📷 [照片 01]", "date": "2026-05-16", "time": "14:06", "imageNote": "志愿活动后拍的小狗：趴在洗好的旧毯子上，耳朵一边折下来，旁边有蓝色水碗。", "src": "./assets/kakao/photo/dream-may/05-16-01.jpg"},
       {"mine": false, "text": "刚刚搬完笼子回来，它已经睡成这样了", "date": "2026-05-16", "time": "14:06"},
       {"mine": true, "text": "上午还一直跟着你绕圈呢", "date": "2026-05-16", "time": "14:07"},
       {"mine": true, "text": "工作人员说有一家人想下周过来看看它", "date": "2026-05-16", "time": "14:07"},
-      {"mine": false, "text": "真的？先替它高兴一点点", "date": "2026-05-16", "time": "14:08"},
-      {"mine": true, "text": "一点点够了，留着下次再高兴", "date": "2026-05-16", "time": "14:08"},
-      {"mine": true, "text": "到家了吗？今天不会又在地铁上坐过站吧", "date": "2026-05-16", "time": "20:41"},
-      {"mine": false, "text": "上次只是出口走反了……今天到家了", "date": "2026-05-16", "time": "20:41"},
-      {"mine": false, "text": "蛋糕确实好吃 但最后一口不是说好留给我的吗", "date": "2026-05-16", "time": "20:42"},
-      {"mine": true, "text": "我以为你把盘子往我这边推是在客气", "date": "2026-05-16", "time": "20:42"},
-      {"mine": false, "text": "那下次我直接写张纸：최수이的", "date": "2026-05-16", "time": "20:43"},
-      {"mine": true, "text": "好，截图了。下次我再给你买一块", "date": "2026-05-16", "time": "20:43"},
+      {"mine": false, "text": "希望这次可以顺利", "date": "2026-05-16", "time": "14:08"},
+      {"mine": true, "text": "응 希望顺利", "date": "2026-05-16", "time": "14:08"},
+      {"mine": true, "text": "oo 到家了吗？", "date": "2026-05-16", "time": "20:41"},
+      {"mine": false, "text": "到楼下了 언니你呢?", "date": "2026-05-16", "time": "20:41"},
+      {"mine": true, "text": "我刚收到通知临时要回公司排练ㅠㅠ", "date": "2026-05-16", "time": "20:42"},
+      {"mine": false, "text": "好辛苦 언니 화이팅！", "date": "2026-05-16", "time": "20:42"},
+      {"mine": true, "text": "我到公司啦 排练完再聊", "date": "2026-05-16", "time": "20:42"},
+      {"mine": true, "text": "排练完啦 好累😔", "date": "2026-05-16", "time": "22:50"},
+      {mine: true,type:"image",src: "./assets/kakao/photo/message-1/1-1.jpg",date: "2026-05-09",time: "22:50"},//在车上的自拍
+      {"mine": true, "text": "在车上", "date": "2026-05-16", "time": "22:50"},
+      {"mine": false, "text": "🫂언니 辛苦啦", "date": "2026-05-16", "time": "22:51"},
+      {"mine": false, "text": "那家咖啡店的蛋糕确实好吃", "date": "2026-05-16", "time": "22:51"},
+      {"mine": false, "text": "不过", "date": "2026-05-16", "time": "22:51"},
+      {"mine": false, "text": "最后一口不是说好留给我的吗언!니!", "date": "2026-05-16", "time": "22:51"},
+      {"mine": true, "text": "ㅋㅋ我以为你把盘子往我这边推是在客气", "date": "2026-05-16", "time": "22:52"},
+      {"mine": true, "text": "好啦好啦 下次我给你买一整块", "date": "2026-05-16", "time": "22:52"},
+      {"mine": true, "text": "已经好晚了 快休息吧", "date": "2026-05-16", "time": "22:52"},
+      {"mine": true, "text": "我明早还要去公司🙈", "date": "2026-05-16", "time": "22:52"},
+      {"mine": false, "text": "练习加油哦 我可是很期待下次回归", "date": "2026-05-16", "time": "22:53"},
+      {"mine": false, "text": "언니晚安 好好休息", "date": "2026-05-16", "time": "22:53"},
+      {"mine": true, "text": "晚安oo 下次有空再出来玩吧", "date": "2026-05-16", "time": "22:54"},
       // 2026-05-17
       {"mine": false, "text": "📷 [照片 02]", "date": "2026-05-17", "time": "11:03", "imageNote": "宿舍早午饭：便利店紫菜饭卷、拆了一半包装的香蕉牛奶，桌角露出课本。", "src": "./assets/kakao/photo/dream-may/05-17-02.jpg"},
       {"mine": false, "text": "给你看一下我周日的豪华早午饭", "date": "2026-05-17", "time": "11:03"},
